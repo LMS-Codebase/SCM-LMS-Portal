@@ -262,7 +262,7 @@ export default function LandingPage() {
                 className="w-full max-w-md sticky top-32 lg:top-40 self-start z-10"
               >
                 <Card className="rounded-2xl shadow-2xl overflow-hidden">
-                  <CardHeader className="bg-[#0a73e8] text-white text-center">
+                  <CardHeader className="bg-teal-600 text-white text-center">
                     <CardTitle className="text-2xl">Login</CardTitle>
                     <CardDescription className="text-blue-100">
                       Login to continue learning
@@ -307,7 +307,7 @@ export default function LandingPage() {
                     <Button
                       // disabled={!isLoginFormValid || loginIsLoading}
                       onClick={() => handleRegistration("login")}
-                      className="w-full bg-[#0a73e8] hover:bg-[#00468c]"
+                      className="w-full bg-teal-600 hover:bg-teal-700"
                     >
                       {loginIsLoading ? (
                         <>
@@ -341,7 +341,7 @@ export default function LandingPage() {
                 className="w-full max-w-md sticky top-32 lg:top-40 self-start z-10"
               >
                 <Card className="rounded-2xl shadow-2xl overflow-hidden">
-                  <CardHeader className="bg-[#0a73e8] text-white text-center">
+                  <CardHeader className="bg-teal-600 text-white text-center">
                     <CardTitle className="text-2xl">Create Account</CardTitle>
                     <CardDescription className="text-blue-100">
                       Sign up to start your journey
@@ -390,7 +390,7 @@ export default function LandingPage() {
                           className={cn(
                             "flex-1 py-2 px-4 rounded-lg border-2 transition-all font-semibold text-sm",
                             signupInput.role === "student"
-                              ? "border-[#0a73e8] bg-blue-50 text-[#0a73e8]"
+                              ? "border-teal-600 bg-blue-50 text-teal-600"
                               : "border-gray-200 text-gray-400 hover:border-gray-300"
                           )}
                         >
@@ -416,7 +416,7 @@ export default function LandingPage() {
                     <Button
                       // disabled={!isSignupFormValid || registerIsLoading}
                       onClick={() => handleRegistration("signup")}
-                      className="w-full bg-[#0a73e8] hover:bg-[#00468c]"
+                      className="w-full bg-teal-600 hover:bg-teal-700"
                     >
                       {registerIsLoading ? (
                         <>
