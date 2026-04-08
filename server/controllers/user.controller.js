@@ -93,7 +93,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     // maxAge : 0  means (turant/instantly) , get logout as soon as the user clicks logout button
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+    return res.status(200).cookie("token", "", { maxAge: 0, sameSite: "none", secure: true }).json({
       message: "Logged out successfully.",
       success: true,
     });
