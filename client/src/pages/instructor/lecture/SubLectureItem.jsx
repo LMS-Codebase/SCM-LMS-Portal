@@ -9,7 +9,7 @@ import { Loader2, Video, Trash2, CheckCircle2 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-const MEDIA_API = "http://localhost:5000/api/v1/media";
+const MEDIA_API = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/media`;
 
 const SubLectureItem = ({ subLecture }) => {
   const [title, setTitle] = useState(subLecture.title || "");

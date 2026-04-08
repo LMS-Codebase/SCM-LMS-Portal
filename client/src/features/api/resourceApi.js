@@ -4,7 +4,7 @@ export const resourceApi = createApi({
   reducerPath: "resourceApi",
   tagTypes: ["Resource"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1/resource/",
+    baseUrl: `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/resource/`,
     credentials: "include",
   }),
   endpoints: (builder) => ({

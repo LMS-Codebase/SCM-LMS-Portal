@@ -4,7 +4,7 @@ export const domainApi = createApi({
   reducerPath: "domainApi",
   tagTypes: ["Domain"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1/domain/",
+    baseUrl: `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/domain/`,
     credentials: "include",
   }),
   endpoints: (builder) => ({

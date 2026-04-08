@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const COURSE_API = "http://localhost:5000/api/v1/course/";
+const COURSE_API = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/course/`;
 
 // when a new course is created , have to refetch it to display it instantly on UI
 // Steps : Add..  tagTypes:["any var name u want to write"] , invalidateTags and provideTags

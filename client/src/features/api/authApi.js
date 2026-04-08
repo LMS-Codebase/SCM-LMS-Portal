@@ -3,7 +3,7 @@ import { userLoggedIn } from "../authSlice";
 
 // Doing API integration in RTK Query
 
-const USER_API = "http://localhost:5000/api/v1/user/"
+const USER_API = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/user/`;
 
 export const authApi = createApi({
     reducerPath: "authApi",

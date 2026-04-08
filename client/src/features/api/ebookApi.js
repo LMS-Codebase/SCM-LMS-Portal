@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const EBOOK_API = "http://localhost:5000/api/v1/ebook/";
+const EBOOK_API = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/v1/ebook/`;
 
 export const ebookApi = createApi({
     reducerPath: "ebookApi",
