@@ -1,8 +1,5 @@
 import nodemailer from 'nodemailer';
-import dns from 'dns';
-
-// Fix for ENETUNREACH error on environments like Render (Forces Node to use IPv4 instead of IPv6)
-dns.setDefaultResultOrder('ipv4first');
+import { promises as dnsPromises } from 'dns';
 
 export const sendContactMessage = async (req, res) => {
     try {
@@ -16,15 +13,21 @@ export const sendContactMessage = async (req, res) => {
             return res.status(400).json({ success: false, message: "Mobile number must be exactly 10 digits." });
         }
 
-        // Configure the Email Transporter
+        // Force DNS lookup for IPv4 to fix Render's ENETUNREACH IPv6 issue
+        const { address } = await dnsPromises.lookup('smtp.gmail.com', { family: 4 });
+
+        // Configure the Email Transporter with the resolved IPv4 address
         const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            host: address,
             port: 465,
             secure: true,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS, // App Password
             },
+            tls: {
+                servername: 'smtp.gmail.com', // Required for SSL certificate verification when using an IP host
+            }
         });
 
         // Structure the Email that you will receive
