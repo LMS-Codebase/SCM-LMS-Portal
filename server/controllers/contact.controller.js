@@ -19,8 +19,8 @@ export const sendContactMessage = async (req, res) => {
         // Configure the Email Transporter with the resolved IPv4 address
         const transporter = nodemailer.createTransport({
             host: address,
-            port: 465,
-            secure: true,
+            port: 587,
+            secure: false, // use false for STARTTLS; true is for port 465
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS, // App Password
