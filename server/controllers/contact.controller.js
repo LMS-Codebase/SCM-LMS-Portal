@@ -1,4 +1,8 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Fix for ENETUNREACH error on environments like Render (Forces Node to use IPv4 instead of IPv6)
+dns.setDefaultResultOrder('ipv4first');
 
 export const sendContactMessage = async (req, res) => {
     try {
@@ -14,7 +18,9 @@ export const sendContactMessage = async (req, res) => {
 
         // Configure the Email Transporter
         const transporter = nodemailer.createTransport({
-            service: "Gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS, // App Password
