@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { useSubmitContactMutation } from '@/features/api/contactApi';
+import emailjs from '@emailjs/browser';
 import { Loader2 } from 'lucide-react';
 import LMSBanner from "../../assets/images/LMSBanner.jpeg";
 
@@ -18,7 +18,7 @@ const ConnectUs = () => {
         designation: "",
         comments: ""
     });
-    const [submitContact, { isLoading }] = useSubmitContactMutation();
+    const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
@@ -45,18 +45,24 @@ const ConnectUs = () => {
         }
 
         setErrors({});
+        setIsLoading(true);
 
         try {
-            const response = await submitContact(form).unwrap();
+            await emailjs.send(
+                'service_tbn6xnw',   // Replace with your EmailJS Service ID 
+                'template_yif35ac',  // Replace with your EmailJS Template ID
+                form,
+                'EgLyuxCGEYbv2EOuj'    // Replace with your EmailJS Public Key 
+            );
 
-            if (response.success) {
-                toast.success(response.message);
-                setForm({ name: "", mobile: "", email: "", organization: "", designation: "", comments: "" });
-                setErrors({});
-            }
+            toast.success("Message sent successfully! We'll be in touch.");
+            setForm({ name: "", mobile: "", email: "", organization: "", designation: "", comments: "" });
+            setErrors({});
         } catch (error) {
             console.error("Contact form error:", error);
-            toast.error(error?.data?.message || "Something went wrong. Please try again.");
+            toast.error("Something went wrong. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
