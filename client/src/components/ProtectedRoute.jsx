@@ -8,8 +8,12 @@ export const ProtectedRoute = ({ children }) => {
 
     if (isLoading) {
         return (
-            <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-                <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+            <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
+                <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
+                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
+                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                    Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
+                </p>
             </div>
         );
     }
@@ -28,8 +32,12 @@ export const StudentRoute = ({ children }) => {
 
     if (isLoading) {
         return (
-            <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-                <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+            <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
+                <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
+                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
+                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                    Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
+                </p>
             </div>
         );
     }
@@ -53,8 +61,12 @@ export const InstructorRoute = ({ children }) => {
 
     if (isLoading) {
         return (
-            <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-                <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+            <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
+                <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
+                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
+                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                    Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
+                </p>
             </div>
         );
     }
@@ -74,14 +86,6 @@ export const InstructorRoute = ({ children }) => {
 
 export const AuthenticatedAdminRoute = ({ children }) => {
     const { data, isLoading } = useLoadUserQuery();
-
-    if (isLoading) {
-        return (
-            <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-                <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
-            </div>
-        );
-    }
 
     // If the user is already logged in securely, prevent them from seeing the 'Login' landing page!
     if (data?.user) {
