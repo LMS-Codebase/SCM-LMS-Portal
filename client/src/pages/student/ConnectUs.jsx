@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
 import { Loader2 } from 'lucide-react';
 import LMSBanner from "../../assets/images/LMSBanner.jpeg";
+import LMSMobileBanner from "../../assets/images/bannerForPhone.jpeg";
 
 const ConnectUs = () => {
     const [form, setForm] = useState({
@@ -69,22 +70,22 @@ const ConnectUs = () => {
     return (
         <div className="min-h-screen flex flex-col bg-gray-50 pt-[72px]">
             {/* HERO SECTION matching Landing Page */}
-            <section
-                className="relative h-[300px] md:h-[380px] flex items-center px-10 text-white"
-                style={{
-                    backgroundImage: `url(${LMSBanner})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                }}
-            >
-                <div className="absolute inset-0 bg-[#002f4b]/10" />
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    className="relative z-10 max-w-xl"
+            <section className="relative w-full">
+                {/* DESKTOP IMAGE */}
+                <img
+                    src={LMSBanner}
+                    alt="Desktop Banner"
+                    className="w-full h-auto hidden md:block" // Keeps horizontal for desktop
                 />
+
+                {/* MOBILE/TAB IMAGE */}
+                <img
+                    src={LMSMobileBanner}
+                    alt="Mobile Banner"
+                    className="w-full h-auto block md:hidden" // Naturally takes whatever square space the image natively has
+                />
+
+                <div className="absolute inset-0 bg-[#002f4b]/10 pointer-events-none" />
             </section>
 
             {/* CONTACT FORM CONTAINER */}

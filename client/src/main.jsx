@@ -11,8 +11,8 @@ import { Toaster } from "./components/ui/sonner";
 import { useLoadUserQuery } from "./features/api/authApi";
 
 const Custom = ({ children }) => {
-  const { isLoading } = useLoadUserQuery();
-  return <>{isLoading ? <h1 className="text-center font-bold text-2xl">Loading....</h1> : <>{children}</>}</>;
+  useLoadUserQuery(); // Just call it to populate Redux store, but don't block render!
+  return <>{children}</>;
 };
 
 createRoot(document.getElementById("root")).render(
@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")).render(
     <Provider store={appStore}>
       <Custom>
         <div className="font-sans">
-        <App />
+          <App />
         </div>
         <Toaster />
       </Custom>
@@ -29,4 +29,3 @@ createRoot(document.getElementById("root")).render(
     {/* </BrowserRouter> */}
   </StrictMode>,
 );
- 

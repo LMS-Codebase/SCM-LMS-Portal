@@ -80,9 +80,9 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "connect-us",
-        element: <ProtectedRoute><ConnectUs /></ProtectedRoute>
+        element: <ConnectUs />
       },
-      // {
+      // { 
       //   path: "resources/ebooks",
       //   element: <EBooks/>
       // },

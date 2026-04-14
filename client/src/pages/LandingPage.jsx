@@ -24,6 +24,8 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 // import Navbar from "../components/Navbar";
 import LMSBanner from "../assets/images/LMSBanner.jpeg"
+// TODO: Replace "LMSbanner.png" with the actual name of your mobile/tab banner image.
+import LMSMobileBanner from "../assets/images/bannerForPhone.jpeg"
 
 
 export default function LandingPage() {
@@ -176,27 +178,23 @@ export default function LandingPage() {
 
       <div className="min-h-screen flex flex-col mt-12">
         {/* HERO */}
-        <section
-          className="relative h-[380px] flex items-center px-10 text-white"
-          style={{
-            backgroundImage:
-              `url(${LMSBanner})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="absolute inset-0 bg-[#002f4b]/30" />
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="relative z-10 max-w-xl"
-          >
-            {/* <h2 className="text-4xl font-bold mb-4">
-              Learning Management System
-            </h2> */}
-          </motion.div>
+        <section className="relative w-full">
+          {/* DESKTOP IMAGE */}
+          <img
+            src={LMSBanner}
+            alt="Desktop Banner"
+            className="w-full h-auto hidden md:block" // Keeps horizontal for desktop
+          />
+
+          {/* MOBILE/TAB IMAGE */}
+          <img
+            src={LMSMobileBanner}
+            alt="Mobile Banner"
+            className="w-full h-auto block md:hidden" // Naturally takes whatever square space the image natively has
+          />
+
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-[#002f4b]/30 pointer-events-none" />
         </section>
 
         {/* CONTENT */}

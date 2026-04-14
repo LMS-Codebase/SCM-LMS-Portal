@@ -100,13 +100,7 @@ const Navbar = () => {
 
             {/* Connect Us / Contact Us */}
             <div
-              onClick={() => {
-                if (!user) {
-                  toast.info("Please log in to contact us!");
-                } else {
-                  navigate("/connect-us");
-                }
-              }}
+              onClick={() => navigate("/connect-us")}
               className="flex items-center gap-2 hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
             >
               <span>Contact Us</span>
@@ -269,20 +263,14 @@ const MobileNavbar = ({ user, logoutHandler }) => {
           )}
 
           {/* About Us */}
-          <a href="https://www.schooconnect.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">
+          <a href="https://www.scmconnect.in" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">
             About Us
           </a>
 
           {/* Connect Us / Contact Us */}
           <div
             className="hover:text-teal-600 transition-colors cursor-pointer"
-            onClick={() => {
-              if (!user) {
-                toast.info("Please log in to contact us!");
-              } else {
-                navigate("/connect-us");
-              }
-            }}
+            onClick={() => navigate("/connect-us")}
           >
             Contact Us
           </div>
