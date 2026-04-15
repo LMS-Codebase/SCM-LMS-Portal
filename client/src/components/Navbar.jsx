@@ -90,7 +90,13 @@ const Navbar = () => {
             {(!user || user?.role !== "instructor") && (
               <div
                 className="hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
-                onClick={() => navigate("/resources")}
+                onClick={() => {
+                  if (!user) {
+                    toast.info("Please log in to explore resources!");
+                  } else {
+                    navigate("/resources");
+                  }
+                }}
               >
                 Resources
               </div>
@@ -254,8 +260,11 @@ const MobileNavbar = ({ user, logoutHandler }) => {
             <div
               className="hover:text-teal-600 transition-colors cursor-pointer"
               onClick={() => {
-                navigate("/resources");
-                // Assuming closing the sheet is handled externally or implicitly on navigation
+                if (!user) {
+                  toast.info("Please log in to explore resources!");
+                } else {
+                  navigate("/resources");
+                }
               }}
             >
               Resources
