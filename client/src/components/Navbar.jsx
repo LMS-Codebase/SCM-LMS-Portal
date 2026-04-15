@@ -93,6 +93,7 @@ const Navbar = () => {
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to explore resources!");
+                    navigate("/");
                   } else {
                     navigate("/resources");
                   }
@@ -120,11 +121,14 @@ const Navbar = () => {
             {(!user || user?.role !== "instructor") && (
               <div
                 className="relative flex items-center gap-2 hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
-                onClick={() =>
-                  !user
-                    ? toast.info("Please log in to view your cart!")
-                    : navigate("/profile#cart-section")
-                }
+                onClick={() => {
+                  if (!user) {
+                    toast.info("Please log in to view your cart!");
+                    navigate("/");
+                  } else {
+                    navigate("/profile#cart-section");
+                  }
+                }}
               >
                 <span>Cart</span>
                 <ShoppingCart size={18} />
@@ -145,6 +149,7 @@ const Navbar = () => {
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to manage your profile!");
+                    navigate("/");
                   } else {
                     navigate("/profile");
                   }
@@ -196,9 +201,10 @@ const Navbar = () => {
               ) : (
                 <Avatar
                   className="cursor-pointer border-2 border-gray-200 hover:border-teal-500 transition-all h-9 w-9 shadow-sm"
-                  onClick={() =>
-                    toast.info("Please log in to access your dashboard!")
-                  }
+                  onClick={() => {
+                    toast.info("Please log in to access your dashboard!");
+                    navigate("/");
+                  }}
                 >
                   <AvatarImage
                     src="https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small_2x/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"
@@ -262,6 +268,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
               onClick={() => {
                 if (!user) {
                   toast.info("Please log in to explore resources!");
+                  navigate("/");
                 } else {
                   navigate("/resources");
                 }
@@ -293,6 +300,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
               onClick={() => {
                 if (!user) {
                   toast.info("Please log in to view your cart!");
+                  navigate("/");
                 } else {
                   navigate("/profile#cart-section");
                 }
@@ -323,6 +331,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
             onClick={() => {
               if (!user) {
                 toast.info("Please log in to manage your profile!");
+                navigate("/");
               } else {
                 navigate("/profile");
               }
