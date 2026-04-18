@@ -126,8 +126,8 @@ export const editEbook = async (req, res) => {
                 const publicId = extractPublicId(ebook.thumbnail);
                 await deleteMediaFromCloudinary(publicId);
             }
-            const uploadedThumb = await uploadMedia(req.files.thumbnail[0].path);
-            ebook.thumbnail = uploadedThumb.secure_url;
+            const fileKey = req.files.thumbnail[0].key;
+            ebook.thumbnail = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
         }
 
         /* ================= PDF FILE ================= */
@@ -136,8 +136,8 @@ export const editEbook = async (req, res) => {
                 const publicId = extractPublicId(ebook.filePDFUrl);
                 await deleteMediaFromCloudinary(publicId);
             }
-            const uploadedPdf = await uploadMedia(req.files.filePDFUrl[0].path, "pdf");
-            ebook.filePDFUrl = uploadedPdf.secure_url;
+            const fileKey = req.files.filePDFUrl[0].key;
+            ebook.filePDFUrl = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
         }
 
         /* ================= AUTHOR IMAGE ================= */
@@ -146,8 +146,8 @@ export const editEbook = async (req, res) => {
                 const publicId = extractPublicId(ebook.authorImage);
                 await deleteMediaFromCloudinary(publicId);
             }
-            const uploadedAuthorImage = await uploadMedia(req.files.authorImage[0].path);
-            ebook.authorImage = uploadedAuthorImage.secure_url;
+            const fileKey = req.files.authorImage[0].key;
+            ebook.authorImage = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
         }
 
         /* ================= BASIC FIELDS ================= */

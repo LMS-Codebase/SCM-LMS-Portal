@@ -212,9 +212,9 @@ export const updateProfile = async (req, res) => {
         const publicId = extractPublicId(user.photoUrl);
         await deleteMediaFromCloudinary(publicId);
       }
-      // Upload new photo
-      const cloudResponse = await uploadMedia(profilePhoto.path);
-      photoUrl = cloudResponse.secure_url;
+      // Set new photo from S3
+      const fileKey = profilePhoto.key;
+      photoUrl = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
     }
 
     // Prepare updated data

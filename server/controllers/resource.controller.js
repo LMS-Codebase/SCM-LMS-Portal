@@ -24,10 +24,10 @@ export const createResource = async (req, res) => {
     // ✅ Upload to Cloudinary
     let logoData = {};
     try {
-      const uploadRes = await uploadMedia(req.file.path);
+      const fileKey = req.file.key;
       logoData = {
-        url: uploadRes.secure_url,
-        public_id: uploadRes.public_id,
+        url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
+        public_id: fileKey,
       };
     } catch (cloudErr) {
       console.error("Cloudinary upload error:", cloudErr);

@@ -1,18 +1,29 @@
 import multer from "multer";
+import multerS3 from "multer-s3";
+import { s3Client } from "./s3.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 
-// creating a folder in server as destination for storing file
-// whatever u pass in 'dest' --> that named folder will get created automatically
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/')
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        const ext = file.originalname.split('.').pop();
-        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + ext)
+const storage = multerS3({
+    s3: s3Client,
+    bucket: process.env.AWS_BUCKET_NAME,
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+        let folder = "images";
+        if (file.mimetype.startsWith("video/")) {
+            folder = "course-videos";
+        } else if (file.mimetype === "application/pdf") {
+            folder = "course-pdfs";
+        }
+
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const ext = file.originalname.split('.').pop() || "bin";
+        const finalKey = `${folder}/${file.fieldname}-${uniqueSuffix}.${ext}`;
+
+        cb(null, finalKey);
     }
-})
+});
 
 const upload = multer({ storage: storage });
 

@@ -189,21 +189,16 @@ export const editCourse = async (req, res) => {
         await deleteMediaFromCloudinary(publicId);
       }
 
-      const uploadedThumb = await uploadMedia(
-        req.files.courseThumbnail[0].path
-      );
-
-      course.courseThumbnail = uploadedThumb.secure_url;
+      const fileKey = req.files.courseThumbnail[0].key;
+      course.courseThumbnail = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
     }
 
     /* ================= COMMON VIDEOS ================= */
     if (req.files?.commonVideos?.length > 0) {
       for (const file of req.files.commonVideos) {
-        const uploadedVideo = await uploadMedia(file.path, "video");
-
         course.commonVideos.push({
-          public_id: uploadedVideo.public_id,
-          url: uploadedVideo.secure_url,
+          public_id: file.key,
+          url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
           originalName: file.originalname,
         });
       }
@@ -212,11 +207,9 @@ export const editCourse = async (req, res) => {
     /* ================= COMMON PDFS ================= */
     if (req.files?.commonPdfs?.length > 0) {
       for (const file of req.files.commonPdfs) {
-        const uploadedPdf = await uploadMedia(file.path, "pdf");
-
         course.commonPdfs.push({
-          public_id: uploadedPdf.public_id,
-          url: uploadedPdf.secure_url, // ✅ FIXED
+          public_id: file.key,
+          url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
           originalName: file.originalname,
         });
       }

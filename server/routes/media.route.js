@@ -12,7 +12,11 @@ const router = express.Router();
 // making it's controller directly here, as it's only has few lines 
 router.route("/upload-video").post(upload.single("file"), async (req, res) => {
     try {
-        const result = await uploadMedia(req.file.path, "video");
+        const fileKey = req.file.key;
+        const result = {
+            public_id: fileKey,
+            secure_url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
+        };
         res.status(200).json({
             success: true,
             message: "File uploaded successfully.",
@@ -26,7 +30,11 @@ router.route("/upload-video").post(upload.single("file"), async (req, res) => {
 
 router.route("/upload-pdf").post(upload.single("file"), async (req, res) => {
     try {
-        const result = await uploadMedia(req.file.path, "pdf");
+        const fileKey = req.file.key;
+        const result = {
+            public_id: fileKey,
+            secure_url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
+        };
         res.status(200).json({
             success: true,
             message: "PDF uploaded successfully.",
