@@ -1,5 +1,5 @@
 import express from "express";
-import multer from "multer";
+
 import {
   createDomain,
   getDomains,
@@ -7,7 +7,7 @@ import {
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/" });
+import upload from "../utils/multer.js";
 
 router.post("/", isAuthenticated, upload.single("logo"), createDomain);
 router.get("/", getDomains);
