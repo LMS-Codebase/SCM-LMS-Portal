@@ -28,7 +28,7 @@ router.route("/:ebookId").put(isAuthenticated, upload.fields([
 ]), editEbook);
 
 router.route("/:ebookId").delete(isAuthenticated, deleteEbook);
-router.route("/:ebookId/publish").patch(isAuthenticated, togglePublishEbook);
+router.route("/:ebookId/publish").put(isAuthenticated, togglePublishEbook);
 router.route("/:ebookId/rate").post(isAuthenticated, rateEbook);
 
 export default router;

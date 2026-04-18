@@ -72,8 +72,8 @@ router.route("/sub-lecture/:subLectureId")
 
 
 // publish route
-// to update some minor thing , so using 'patch' method
-router.route("/:courseId").patch(isAuthenticated, togglePublishCourse);
+// changed from patch to put to bypass strict network blockages
+router.route("/:courseId/publish").put(isAuthenticated, togglePublishCourse);
 
 // rate course
 router.route("/:courseId/rate").post(isAuthenticated, rateCourse);

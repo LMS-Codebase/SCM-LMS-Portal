@@ -63,7 +63,7 @@ export const ebookApi = createApi({
         publishEbook: builder.mutation({
             query: ({ ebookId, query }) => ({
                 url: `/${ebookId}/publish?publish=${query}`,
-                method: "PATCH"
+                method: "PUT"
             }),
             invalidatesTags: (result, error, arg) => [
                 { type: "Refetch_Creator_Ebook" },
