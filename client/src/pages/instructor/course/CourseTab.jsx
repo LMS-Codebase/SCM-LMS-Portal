@@ -222,7 +222,7 @@ const CourseTab = () => {
         </div>
         <div className="flex gap-3">
           <Button
-            disabled={courseByIdData?.course?.lectures?.length === 0 || isUpdating || isDeleting}
+            disabled={(!courseByIdData?.course?.lectures?.length && !courseByIdData?.course?.commonPdfs?.length && !courseByIdData?.course?.commonVideos?.length) || isUpdating || isDeleting}
             variant="outline"
             className={`font-bold transition-all ${courseByIdData?.course.isPublished ? 'border-orange-200 text-orange-600 hover:bg-orange-50' : 'border-teal-200 text-teal-600 hover:bg-teal-50'}`}
             onClick={() => publishStatusHandler(courseByIdData?.course.isPublished ? "false" : "true")}

@@ -129,7 +129,11 @@ export const courseApi = createApi({
             query: ({ courseId, query }) => ({
                 url: `/${courseId}?publish=${query}`,
                 method: "PATCH"
-            })
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: "Course", id: arg.courseId },
+                "Refetch_Creator_Course"
+            ]
         }),
         rateCourse: builder.mutation({
             query: ({ courseId, rating }) => ({
