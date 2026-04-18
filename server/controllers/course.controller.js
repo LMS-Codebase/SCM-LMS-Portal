@@ -1,6 +1,6 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
-import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia } from "../utils/cloudinary.js"
+import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia, extractPublicId } from "../utils/s3.js"
 
 
 // Creating Courses
@@ -185,11 +185,7 @@ export const editCourse = async (req, res) => {
     // Only run this if user uploads a new image
     if (req.files?.courseThumbnail?.[0]) {
       if (course.courseThumbnail) {
-        const publicId = course.courseThumbnail
-          .split("/")
-          .pop()
-          .split(".")[0];
-
+        const publicId = extractPublicId(course.courseThumbnail);
         await deleteMediaFromCloudinary(publicId);
       }
 

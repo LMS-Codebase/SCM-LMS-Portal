@@ -1,5 +1,5 @@
 import { Ebook } from "../models/ebook.model.js";
-import { uploadMedia, deleteMediaFromCloudinary } from "../utils/cloudinary.js";
+import { uploadMedia, extractPublicId, deleteMediaFromCloudinary } from "../utils/s3.js";
 
 
 
@@ -123,7 +123,7 @@ export const editEbook = async (req, res) => {
         /* ================= THUMBNAIL ================= */
         if (req.files?.thumbnail?.[0]) {
             if (ebook.thumbnail) {
-                const publicId = ebook.thumbnail.split("/").pop().split(".")[0];
+                const publicId = extractPublicId(ebook.thumbnail);
                 await deleteMediaFromCloudinary(publicId);
             }
             const uploadedThumb = await uploadMedia(req.files.thumbnail[0].path);
@@ -133,7 +133,7 @@ export const editEbook = async (req, res) => {
         /* ================= PDF FILE ================= */
         if (req.files?.filePDFUrl?.[0]) {
             if (ebook.filePDFUrl) {
-                const publicId = ebook.filePDFUrl.split("/").pop().split(".")[0];
+                const publicId = extractPublicId(ebook.filePDFUrl);
                 await deleteMediaFromCloudinary(publicId);
             }
             const uploadedPdf = await uploadMedia(req.files.filePDFUrl[0].path, "pdf");
@@ -143,7 +143,7 @@ export const editEbook = async (req, res) => {
         /* ================= AUTHOR IMAGE ================= */
         if (req.files?.authorImage?.[0]) {
             if (ebook.authorImage) {
-                const publicId = ebook.authorImage.split("/").pop().split(".")[0];
+                const publicId = extractPublicId(ebook.authorImage);
                 await deleteMediaFromCloudinary(publicId);
             }
             const uploadedAuthorImage = await uploadMedia(req.files.authorImage[0].path);
@@ -196,15 +196,15 @@ export const deleteEbook = async (req, res) => {
 
         // Delete images/pdfs from cloudinary
         if (ebook.thumbnail) {
-            const publicId = ebook.thumbnail.split("/").pop().split(".")[0];
+            const publicId = extractPublicId(ebook.thumbnail);
             await deleteMediaFromCloudinary(publicId);
         }
         if (ebook.filePDFUrl) {
-            const publicId = ebook.filePDFUrl.split("/").pop().split(".")[0];
+            const publicId = extractPublicId(ebook.filePDFUrl);
             await deleteMediaFromCloudinary(publicId);
         }
         if (ebook.authorImage) {
-            const publicId = ebook.authorImage.split("/").pop().split(".")[0];
+            const publicId = extractPublicId(ebook.authorImage);
             await deleteMediaFromCloudinary(publicId);
         }
 

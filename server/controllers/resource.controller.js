@@ -1,5 +1,5 @@
 import Resource from "../models/resource.model.js";
-import { uploadMedia } from "../utils/cloudinary.js";
+import { uploadMedia } from "../utils/s3.js";
 
 export const createResource = async (req, res) => {
   try {

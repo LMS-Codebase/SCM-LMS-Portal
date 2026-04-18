@@ -4,7 +4,7 @@ import { Ebook } from "../models/ebook.model.js";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
-import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
+import { deleteMediaFromCloudinary, uploadMedia, extractPublicId } from "../utils/s3.js";
 
 //                                                          Register
 export const register = async (req, res) => {
@@ -209,7 +209,7 @@ export const updateProfile = async (req, res) => {
     if (profilePhoto) {
       // Delete old photo from Cloudinary if it exists
       if (user.photoUrl) {
-        const publicId = user.photoUrl.split("/").pop().split(".")[0];
+        const publicId = extractPublicId(user.photoUrl);
         await deleteMediaFromCloudinary(publicId);
       }
       // Upload new photo

@@ -1,6 +1,6 @@
 // // controllers/domain.controller.js
 // import Domain from "../models/domain.model.js";
-// import { uploadMedia } from "../utils/cloudinary.js";
+// import { uploadMedia } from "../utils/s3.js";
 
 // export const createDomain = async (req, res) => {
 //   try {
@@ -63,7 +63,7 @@
 
 
 import Domain from "../models/domain.model.js";
-import { uploadMedia } from "../utils/cloudinary.js";
+import { uploadMedia } from "../utils/s3.js";
 
 export const createDomain = async (req, res) => {
   try {

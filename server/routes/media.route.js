@@ -2,7 +2,7 @@
 
 import express from "express";
 import upload from "../utils/multer.js"
-import { uploadMedia } from "../utils/cloudinary.js";
+import { uploadMedia, generatePresignedUrl } from "../utils/s3.js";
 
 
 const router = express.Router();
@@ -35,6 +35,22 @@ router.route("/upload-pdf").post(upload.single("file"), async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Error uploading PDF" })
+    }
+});
+
+// Dynamic pre-signed URL proxy
+router.route("/s3").get(async (req, res) => {
+    try {
+        const key = req.query.key;
+        if (!key) {
+            return res.status(400).json({ message: "S3 Object Key is required" });
+        }
+        const signedUrl = await generatePresignedUrl(key);
+        // Redirect the browser to the pre-signed S3 URL
+        res.redirect(signedUrl);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error generating pre-signed URL" });
     }
 });
 

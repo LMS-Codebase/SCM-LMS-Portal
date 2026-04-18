@@ -1,6 +1,6 @@
 import SubLecture from "../models/subLecture.model.js";
 import { Lecture } from "../models/lecture.model.js"; // ✅ FIX
-import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia } from "../utils/cloudinary.js"
+import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia } from "../utils/s3.js"
 
 
 
