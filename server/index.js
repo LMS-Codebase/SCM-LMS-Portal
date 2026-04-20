@@ -38,12 +38,25 @@ export const instance = new Razorpay({
 connectDB();
 const app = express();
 
+
+const allowedOrigins = [
+  "https://learn.scmconnect.in",
+  "https://scmconnect.in",
+  "http://localhost:5173"
+];
+
 // default middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
