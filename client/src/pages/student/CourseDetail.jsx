@@ -54,9 +54,9 @@ const CourseDetail = () => {
                 ? `Access until ${new Date(courseAccessExpiration.expiresAt).toLocaleDateString("en-GB")}`
                 : `${course?.validityPeriod || "Lifetime"} access from purchase`;
 
-    // Keep activeMedia synced with course progression if no custom common resource is overridden
+    // Keep activeMedia synced with course progression initially
     useEffect(() => {
-        if (hasCourseAccess && course?.lectures?.[currentLectureIndex]) {
+        if (!activeMedia && hasCourseAccess && course?.lectures?.[currentLectureIndex]) {
             setActiveMedia({
                 type: 'video',
                 url: course.lectures[currentLectureIndex].videoUrl,
@@ -64,7 +64,7 @@ const CourseDetail = () => {
                 isLecture: true
             });
         }
-    }, [hasCourseAccess, currentLectureIndex, course]);
+    }, [hasCourseAccess, currentLectureIndex, course, activeMedia]);
 
     if (isLoading || isProgressLoading) return (
         <div className="flex items-center justify-center min-h-[60vh]">
@@ -124,6 +124,34 @@ const CourseDetail = () => {
 
         if (isLectureUnlocked(index)) {
             setCurrentLectureIndex(index);
+            if (course?.lectures?.[index]) {
+                setActiveMedia({
+                    type: 'video',
+                    url: course.lectures[index].videoUrl,
+                    title: course.lectures[index].lectureTitle,
+                    isLecture: true
+                });
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            toast.error("Finish the previous lecture to unlock this one!");
+        }
+    };
+
+    const handleSelectSubLecture = (lectureIndex, subLecture) => {
+        if (!hasCourseAccess) {
+            toast.error("Please enroll in the course to watch this sub-lecture.");
+            return;
+        }
+
+        if (isLectureUnlocked(lectureIndex)) {
+            setCurrentLectureIndex(lectureIndex);
+            setActiveMedia({
+                type: 'video',
+                url: subLecture.videoUrl,
+                title: subLecture.title,
+                isLecture: true
+            });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             toast.error("Finish the previous lecture to unlock this one!");
@@ -329,20 +357,48 @@ const CourseDetail = () => {
                                                                 )}
                                                             </div>
                                                             <div className="flex items-center gap-2">
-                                                                <Video size={16} className={(isCurrent && hasCourseAccess) ? "text-teal-600" : "text-gray-400"} />
-                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess) ? "text-teal-700 font-bold" : "text-gray-700")}>
+                                                                <Video size={16} className={(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-teal-600" : "text-gray-400"} />
+                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-teal-700 font-bold" : "text-gray-700")}>
                                                                     Watch Video
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <span className={cn(
                                                             "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
-                                                            (isCurrent && hasCourseAccess) ? "bg-teal-600 text-white" : (isUnlocked ? "bg-teal-50 text-teal-600" : "bg-gray-100 text-gray-500")
+                                                            (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "bg-teal-600 text-white" : (isUnlocked ? "bg-teal-50 text-teal-600" : "bg-gray-100 text-gray-500")
                                                         )}>
-                                                            {(isCurrent && hasCourseAccess) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
+                                                            {(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
                                                         </span>
                                                     </div>
                                                 )}
+
+                                                {/* Sub Lectures Content */}
+                                                {lecture.subLectures?.map((subLecture, subIdx) => (
+                                                    <div
+                                                        key={subLecture._id || subIdx}
+                                                        className={cn(
+                                                            "flex items-center justify-between p-4 pl-12 hover:bg-teal-50/30 transition-colors group/item cursor-pointer border-t border-gray-50",
+                                                            !isUnlocked && "pointer-events-none"
+                                                        )}
+                                                        onClick={() => handleSelectSubLecture(idx, subLecture)}
+                                                    >
+                                                        <div className="flex items-center gap-4">
+                                                            <Circle size={8} className="text-gray-300 fill-gray-300" />
+                                                            <div className="flex items-center gap-2">
+                                                                <Video size={14} className={(isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-teal-600" : "text-gray-400"} />
+                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-teal-700 font-bold" : "text-gray-600")}>
+                                                                    {subLecture.title}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className={cn(
+                                                            "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
+                                                            (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "bg-teal-600 text-white" : (isUnlocked ? "bg-teal-50 text-teal-600" : "bg-gray-100 text-gray-400")
+                                                        )}>
+                                                            {(isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
+                                                        </span>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </CardContent>
                                     </Card>

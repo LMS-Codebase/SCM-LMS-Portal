@@ -76,7 +76,7 @@ const CourseTab = () => {
         subTitle: course.subTitle || "",
         description: course.description || "",
         courseLevel: course.courseLevel || "",
-        coursePrice: course.coursePrice || "",
+        coursePrice: course.coursePrice !== undefined && course.coursePrice !== null ? course.coursePrice : "",
         courseDuration: course.courseDuration || "",
         validityPeriod: course.validityPeriod || "Lifetime",
         courseThumbnail: "",
@@ -177,7 +177,7 @@ const CourseTab = () => {
       if (input.validityPeriod) formData.append("validityPeriod", input.validityPeriod);
       if (input.courseDuration) formData.append("courseDuration", input.courseDuration);
       if (input.resource) formData.append("resource", input.resource);
-      if (input.coursePrice) formData.append("coursePrice", input.coursePrice);
+      if (input.coursePrice !== "" && input.coursePrice !== undefined && input.coursePrice !== null) formData.append("coursePrice", input.coursePrice);
       if (input.courseThumbnail) formData.append("courseThumbnail", input.courseThumbnail);
 
       input.domain?.forEach(id => formData.append("domain", id));
