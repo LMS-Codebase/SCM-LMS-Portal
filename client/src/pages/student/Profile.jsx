@@ -462,9 +462,9 @@ const Profile = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={user?.enrolledCourses?.length === 0 ? "" : "flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scroll-smooth custom-scrollbar"}>
               {user?.enrolledCourses?.length === 0 ? (
-                <div className="col-span-full py-12 text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                <div className="py-12 w-full text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
                   <p className="text-gray-500 font-medium">You haven't enrolled in any courses yet.</p>
                   <Button asChild variant="link" className="text-teal-600 mt-2">
                     <a href="/explore">Browse Courses</a>
@@ -472,18 +472,19 @@ const Profile = () => {
                 </div>
               ) : (
                 user?.enrolledCourses?.map((item) => (
-                  <Course
-                    key={item._id}
-                    courseId={item._id}
-                    image={item.courseThumbnail?.url || item.courseThumbnail}
-                    title={item.courseTitle}
-                    price={item.coursePrice}
-                    duration={item.courseDuration}
-                    instructorName={item.creator?.name}
-                    instructorAvatar={item.creator?.photoUrl}
-                    level={item.courseLevel}
-                    isEbook={false}
-                  />
+                  <div key={item._id} className="snap-start shrink-0">
+                    <Course
+                      courseId={item._id}
+                      image={item.courseThumbnail?.url || item.courseThumbnail}
+                      title={item.courseTitle}
+                      price={item.coursePrice}
+                      duration={item.courseDuration}
+                      instructorName={item.creator?.name}
+                      instructorAvatar={item.creator?.photoUrl}
+                      level={item.courseLevel}
+                      isEbook={false}
+                    />
+                  </div>
                 ))
               )}
             </div>
@@ -498,9 +499,9 @@ const Profile = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={user?.enrolledEbooks?.length === 0 ? "" : "flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scroll-smooth custom-scrollbar"}>
               {user?.enrolledEbooks?.length === 0 ? (
-                <div className="col-span-full py-12 text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                <div className="py-12 w-full text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
                   <p className="text-gray-500 font-medium">You haven't purchased any e-books yet.</p>
                   <Button asChild variant="link" className="text-purple-600 mt-2">
                     <a href="/explore">Browse E-Books</a>
@@ -508,18 +509,19 @@ const Profile = () => {
                 </div>
               ) : (
                 user?.enrolledEbooks?.map((item) => (
-                  <Course
-                    key={item._id}
-                    courseId={item._id}
-                    image={item.thumbnail}
-                    title={item.title}
-                    price={item.price}
-                    duration={item.noOfPages}
-                    instructorName={item.authorName}
-                    instructorAvatar={item.creator?.photoUrl}
-                    level="E-Book"
-                    isEbook={true}
-                  />
+                  <div key={item._id} className="snap-start shrink-0">
+                    <Course
+                      courseId={item._id}
+                      image={item.thumbnail}
+                      title={item.title}
+                      price={item.price}
+                      duration={item.noOfPages}
+                      instructorName={item.authorName}
+                      instructorAvatar={item.creator?.photoUrl}
+                      level="E-Book"
+                      isEbook={true}
+                    />
+                  </div>
                 ))
               )}
             </div>
