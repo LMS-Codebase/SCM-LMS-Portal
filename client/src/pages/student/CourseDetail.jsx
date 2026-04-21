@@ -42,16 +42,21 @@ const CourseDetail = () => {
     const isCourseInCart = user?.cart?.some(
         item => item.resourceType === "course" && String(item.resourceId) === String(courseId)
     );
-    const purchasedCourse = user?.enrolledCourses?.some(c => (c._id || c) === courseId) || user?._id === (course?.creator?._id || course?.creator);
-    const hasCourseAccess = purchasedCourse || (Number(course?.coursePrice || 0) === 0 && isCourseInCart);
+    const isOwner = user?._id === (course?.creator?._id || course?.creator);
+    const isPurchased = user?.enrolledCourses?.some(c => (c._id || c) === courseId);
+
     const courseAccessExpiration = user?.accessExpirations?.find(
         (exp) => String(exp.resourceId?._id || exp.resourceId) === courseId
     );
+    const hasExpired = courseAccessExpiration?.expiresAt && new Date(courseAccessExpiration.expiresAt).getTime() < Date.now();
+
+    const hasCourseAccess = isOwner || (isPurchased && !hasExpired) || (Number(course?.coursePrice || 0) === 0 && isCourseInCart);
+
     const courseAccessLabel =
         course?.validityPeriod === "Lifetime"
             ? "Full lifetime access"
-            : hasCourseAccess && courseAccessExpiration?.expiresAt
-                ? `Access until ${new Date(courseAccessExpiration.expiresAt).toLocaleDateString("en-GB")}`
+            : isPurchased && courseAccessExpiration?.expiresAt
+                ? (hasExpired ? `Access expired on ${new Date(courseAccessExpiration.expiresAt).toLocaleDateString("en-GB")}` : `Access until ${new Date(courseAccessExpiration.expiresAt).toLocaleDateString("en-GB")}`)
                 : `${course?.validityPeriod || "Lifetime"} access from purchase`;
 
     // Keep activeMedia synced with course progression initially
@@ -530,10 +535,10 @@ const CourseDetail = () => {
                                                 className="w-full h-full object-cover"
                                             />
                                             {!hasCourseAccess && (
-                                                <div className='absolute inset-0 bg-black/60 flex items-center justify-center z-20'>
-                                                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-white text-[10px] uppercase font-bold tracking-widest shadow-2xl flex flex-col items-center gap-3">
-                                                        <Lock size={20} className="text-teal-400" />
-                                                        <span>Enroll to unlock this course</span>
+                                                <div className='absolute inset-0 bg-black/60 flex items-center justify-center z-20 text-center px-4'>
+                                                    <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-white text-[11px] md:text-sm uppercase font-bold tracking-widest shadow-2xl flex flex-col items-center gap-3">
+                                                        <Lock size={24} className="text-teal-400" />
+                                                        <span>{hasExpired ? "Your access to this course has expired" : "Enroll to unlock this course"}</span>
                                                     </div>
                                                 </div>
                                             )}

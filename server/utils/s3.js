@@ -90,8 +90,8 @@ export const generatePresignedUrl = async (key) => {
       Bucket: bucketName,
       Key: key,
     });
-    // Valid for 24 hours (86400 seconds)
-    const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 86400 });
+    // Valid for 2 mins (120 seconds) - extremely short to prevent URL sharing
+    const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 120 });
     return signedUrl;
   } catch (error) {
     console.error("Error generating pre-signed URL:", error);

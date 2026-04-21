@@ -73,21 +73,21 @@ export const checkout = async (req, res) => {
           if (item.resourceType === 'course') {
             if (!user.enrolledCourses.includes(item.resourceId)) {
               user.enrolledCourses.push(item.resourceId);
-              const course = await Course.findById(item.resourceId);
-              if (course) {
-                addAccessExpiration(user, item.resourceId, course.validityPeriod);
-                if (!course.enrolledStudents.includes(userId)) {
-                  course.enrolledStudents.push(userId);
-                  await course.save();
-                }
+            }
+            const course = await Course.findById(item.resourceId);
+            if (course) {
+              addAccessExpiration(user, item.resourceId, course.validityPeriod);
+              if (!course.enrolledStudents.includes(userId)) {
+                course.enrolledStudents.push(userId);
+                await course.save();
               }
             }
           } else if (item.resourceType === 'ebook') {
             if (!user.enrolledEbooks.includes(item.resourceId)) {
               user.enrolledEbooks.push(item.resourceId);
-              const ebook = await Ebook.findById(item.resourceId);
-              if (ebook) addAccessExpiration(user, item.resourceId, ebook.validityPeriod);
             }
+            const ebook = await Ebook.findById(item.resourceId);
+            if (ebook) addAccessExpiration(user, item.resourceId, ebook.validityPeriod);
           }
         }
         await user.save();
@@ -95,13 +95,13 @@ export const checkout = async (req, res) => {
         if (resourceType === 'course') {
           if (!user.enrolledCourses.includes(resourceId)) {
             user.enrolledCourses.push(resourceId);
-            const course = await Course.findById(resourceId);
-            if (course) {
-              addAccessExpiration(user, resourceId, course.validityPeriod);
-              if (!course.enrolledStudents.includes(userId)) {
-                course.enrolledStudents.push(userId);
-                await course.save();
-              }
+          }
+          const course = await Course.findById(resourceId);
+          if (course) {
+            addAccessExpiration(user, resourceId, course.validityPeriod);
+            if (!course.enrolledStudents.includes(userId)) {
+              course.enrolledStudents.push(userId);
+              await course.save();
             }
           }
           if (!user.cart.some(item => item.resourceId.toString() === resourceId && item.resourceType === 'course')) {
@@ -110,9 +110,10 @@ export const checkout = async (req, res) => {
         } else if (resourceType === 'ebook') {
           if (!user.enrolledEbooks.includes(resourceId)) {
             user.enrolledEbooks.push(resourceId);
-            const ebook = await Ebook.findById(resourceId);
-            if (ebook) addAccessExpiration(user, resourceId, ebook.validityPeriod);
           }
+          const ebook = await Ebook.findById(resourceId);
+          if (ebook) addAccessExpiration(user, resourceId, ebook.validityPeriod);
+
           if (!user.cart.some(item => item.resourceId.toString() === resourceId && item.resourceType === 'ebook')) {
             user.cart.push({ resourceId, resourceType: 'ebook' });
           }
@@ -172,8 +173,9 @@ export const paymentVerification = async (req, res) => {
             if (course) {
               if (!user.enrolledCourses.includes(item.resourceId)) {
                 user.enrolledCourses.push(item.resourceId);
-                addAccessExpiration(user, item.resourceId, course.validityPeriod);
               }
+              addAccessExpiration(user, item.resourceId, course.validityPeriod);
+
               if (!course.enrolledStudents.includes(userId)) {
                 course.enrolledStudents.push(userId);
                 await course.save();
@@ -183,8 +185,8 @@ export const paymentVerification = async (req, res) => {
             const ebook = await Ebook.findById(item.resourceId);
             if (!user.enrolledEbooks.includes(item.resourceId)) {
               user.enrolledEbooks.push(item.resourceId);
-              if (ebook) addAccessExpiration(user, item.resourceId, ebook.validityPeriod);
             }
+            if (ebook) addAccessExpiration(user, item.resourceId, ebook.validityPeriod);
           }
         }
         user.cart = []; // Empty the cart on successful multi-purchase
@@ -195,8 +197,9 @@ export const paymentVerification = async (req, res) => {
 
           if (!user.enrolledCourses.includes(resourceId)) {
             user.enrolledCourses.push(resourceId);
-            addAccessExpiration(user, resourceId, course.validityPeriod);
           }
+          addAccessExpiration(user, resourceId, course.validityPeriod);
+
           if (!course.enrolledStudents.includes(userId)) {
             course.enrolledStudents.push(userId);
             await course.save();
@@ -207,8 +210,8 @@ export const paymentVerification = async (req, res) => {
 
           if (!user.enrolledEbooks.includes(resourceId)) {
             user.enrolledEbooks.push(resourceId);
-            addAccessExpiration(user, resourceId, ebook.validityPeriod);
           }
+          addAccessExpiration(user, resourceId, ebook.validityPeriod);
         }
       }
 

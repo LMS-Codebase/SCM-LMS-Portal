@@ -309,7 +309,7 @@ export const getCourseById = async (req, res) => {
     }
 
     const userId = req.id;
-    const user = userId ? await import("../models/user.model.js").then(m => m.User.findById(userId).select("cart")) : null;
+    const user = userId ? await import("../models/user.model.js").then(m => m.User.findById(userId).select("cart accessExpirations")) : null;
     const isOwner = userId ? course.creator?._id.toString() === userId.toString() : false;
     const isPurchased = userId
       ? course.enrolledStudents?.some(studentId => studentId.toString() === userId.toString())
@@ -320,7 +320,15 @@ export const getCourseById = async (req, res) => {
       )
       : false;
 
-    if (!isOwner && !isPurchased && !hasFreeCartAccess) {
+    let hasExpired = false;
+    if (isPurchased && user) {
+      const expRecord = user.accessExpirations?.find(exp => exp.resourceId?.toString() === courseId.toString());
+      if (expRecord && expRecord.expiresAt && new Date(expRecord.expiresAt).getTime() < Date.now()) {
+        hasExpired = true;
+      }
+    }
+
+    if (!isOwner && (!isPurchased || hasExpired) && !hasFreeCartAccess) {
       // Keep course details visible, but hide protected learning assets until enrolled.
       course.lectures.forEach(lecture => {
         lecture.videoUrl = undefined;

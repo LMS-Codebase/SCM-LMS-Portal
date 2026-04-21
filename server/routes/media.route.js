@@ -3,6 +3,7 @@
 import express from "express";
 import upload from "../utils/multer.js"
 import { uploadMedia, generatePresignedUrl } from "../utils/s3.js";
+import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 
 const router = express.Router();
@@ -10,7 +11,7 @@ const router = express.Router();
 
 // end-point for media/lectureVideo upload
 // making it's controller directly here, as it's only has few lines 
-router.route("/upload-video").post(upload.single("file"), async (req, res) => {
+router.route("/upload-video").post(isAuthenticated, upload.single("file"), async (req, res) => {
     try {
         const fileKey = req.file.key;
         const result = {
@@ -28,7 +29,7 @@ router.route("/upload-video").post(upload.single("file"), async (req, res) => {
     }
 });
 
-router.route("/upload-pdf").post(upload.single("file"), async (req, res) => {
+router.route("/upload-pdf").post(isAuthenticated, upload.single("file"), async (req, res) => {
     try {
         const fileKey = req.file.key;
         const result = {
@@ -47,7 +48,7 @@ router.route("/upload-pdf").post(upload.single("file"), async (req, res) => {
 });
 
 // Dynamic pre-signed URL proxy
-router.route("/s3").get(async (req, res) => {
+router.route("/s3").get(isAuthenticated, async (req, res) => {
     try {
         const key = req.query.key;
         if (!key) {
