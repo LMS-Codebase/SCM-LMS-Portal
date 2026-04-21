@@ -56,6 +56,7 @@ const LectureTab = () => {
       try {
         const endpoint = type === "video" ? `${MEDIA_API}/upload-video` : `${MEDIA_API}/upload-pdf`;
         const res = await axios.post(endpoint, formData, {
+          withCredentials: true,
           onUploadProgress: ({ loaded, total }) => {
             setUploadProgress(Math.round((loaded * 100) / total));
           },

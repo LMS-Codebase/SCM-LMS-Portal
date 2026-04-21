@@ -39,6 +39,7 @@ const SubLectureItem = ({ subLecture }) => {
       setUploadProgress(0);
       try {
         const res = await axios.post(`${MEDIA_API}/upload-video`, formData, {
+          withCredentials: true,
           onUploadProgress: ({ loaded, total }) => {
             setUploadProgress(Math.round((loaded * 100) / total));
           },
