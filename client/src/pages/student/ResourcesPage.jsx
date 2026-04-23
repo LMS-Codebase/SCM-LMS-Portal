@@ -163,7 +163,7 @@ const Card = ({ title, image, onClick }) => (
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-fill"
+          className="w-full h-full object-cover object-center"
         />
       </div>
     </div>
