@@ -198,10 +198,10 @@ export default function LandingPage() {
         </section>
 
         {/* CONTENT */}
-        <section className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 px-6 sm:px-12 lg:px-28 py-12 lg:py-16 bg-gray-100">
+        <section className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 px-6 sm:px-12 lg:px-28 py-12 lg:py-16 bg-white">
           <div className="flex-1" >
             <div>
-              <h1 className="text-2xl font-bold text-gray-700">Capability Building for Modern Supply Chains | <span className="font-normal">By SCM Connect Private Limited</span></h1>
+              <h1 className="text-2xl font-bold text-gray-700">Capability Building for Modern Supply Chains</h1>
               <h2 className="text-xl font-bold text-gray-700 mt-8">Overview</h2>
               <p className="text-gray-600 space-y-4 mt-2">SCM Learning & Development is the capability enhancement initiative of SCM Connect, designed to build structured, practical, and performance-driven supply chain competencies.<br />
                 Our programs are developed and delivered by industry practitioners, with a clear focus on execution, measurable outcomes, and business impact.
