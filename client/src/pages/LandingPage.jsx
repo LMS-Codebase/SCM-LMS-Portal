@@ -23,9 +23,9 @@ import { Loader2, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 // import Navbar from "../components/Navbar";
-import LMSBanner from "../assets/images/LMSBanner.jpeg"
+import LMSBanner from "../assets/images/LandingPageBanner.jpg"
 // TODO: Replace "LMSbanner.png" with the actual name of your mobile/tab banner image.
-import LMSMobileBanner from "../assets/images/bannerForPhone.jpeg"
+import LMSMobileBanner from "../assets/images/LandingPageBanner.jpg"
 
 
 export default function LandingPage() {
@@ -178,23 +178,33 @@ export default function LandingPage() {
 
       <div className="min-h-screen flex flex-col mt-12">
         {/* HERO */}
-        <section className="relative w-full">
+        <section className="relative w-full h-[50vh] md:h-[55vh] flex items-center">
           {/* DESKTOP IMAGE */}
           <img
             src={LMSBanner}
             alt="Desktop Banner"
-            className="w-full h-auto hidden md:block" // Keeps horizontal for desktop
+            className="absolute inset-0 w-full h-full object-cover object-center hidden md:block -z-10"
           />
 
           {/* MOBILE/TAB IMAGE */}
           <img
             src={LMSMobileBanner}
             alt="Mobile Banner"
-            className="w-full h-auto block md:hidden" // Naturally takes whatever square space the image natively has
+            className="absolute inset-0 w-full h-full object-cover object-center block md:hidden -z-10"
           />
 
           {/* OVERLAY */}
-          <div className="absolute inset-0 bg-[#002f4b]/30 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#192a5699]/60 pointer-events-none -z-10" />
+
+          {/* BANNER CONTENT */}
+          <div className="px-6 sm:px-12 lg:px-32 w-full z-10 flex flex-col items-start pt-4">
+            <h1 className="text-4xl sm:text-4xl lg:text-[42px] font-medium text-white mb-3 max-w-4xl tracking-tight drop-shadow-sm">
+              Supply Chain E-learning Platform
+            </h1>
+            <p className="text-base sm:text-lg text-white/95 font-normal tracking-normal max-w-2xl mb-6 drop-shadow-sm">
+              Empowering Supply Chains Through Smarter Learning
+            </p>
+          </div>
         </section>
 
         {/* CONTENT */}
@@ -260,16 +270,13 @@ export default function LandingPage() {
                 className="w-full max-w-md sticky top-32 lg:top-40 self-start z-10"
               >
                 <Card className="rounded-2xl shadow-2xl overflow-hidden">
-                  <CardHeader className="bg-teal-600 text-white text-center">
-                    <CardTitle className="text-2xl">Login</CardTitle>
-                    <CardDescription className="text-blue-100">
-                      Login to continue learning
-                    </CardDescription>
+                  <CardHeader className="bg-gradient-to-r from-[#007bff] to-[#0056b3] text-white text-center py-6">
+                    <CardTitle className="text-3xl font-semibold">Login</CardTitle>
                   </CardHeader>
 
                   <CardContent className="grid gap-5 pt-6">
                     <div className="grid gap-2">
-                      <Label>Username</Label>
+                      <Label className="text-gray-700 font-semibold">Username:</Label>
                       <Input
                         name="name"
                         type="tel"
@@ -278,17 +285,19 @@ export default function LandingPage() {
                         placeholder="Put your mobile number"
                         value={loginInput.name}
                         onChange={(e) => changeInputHandler(e, "login")}
+                        className="bg-blue-50 border-gray-200 focus-visible:ring-[#007bff]"
                       />
                     </div>
 
                     <div className="grid gap-2">
-                      <Label>Password</Label>
+                      <Label className="text-gray-700 font-semibold">Password:</Label>
                       <div className="relative">
                         <Input
                           type={showLoginPassword ? "text" : "password"}
                           name="password"
                           value={loginInput.password}
                           onChange={(e) => changeInputHandler(e, "login")}
+                          className="bg-blue-50 border-gray-200 focus-visible:ring-[#007bff]"
                         />
                         <button
                           type="button"
@@ -305,7 +314,7 @@ export default function LandingPage() {
                     <Button
                       // disabled={!isLoginFormValid || loginIsLoading}
                       onClick={() => handleRegistration("login")}
-                      className="w-full bg-teal-600 hover:bg-teal-700"
+                      className="w-full bg-[#007bff] hover:bg-[#0056b3] text-white rounded-full py-6 font-bold shadow-md text-base"
                     >
                       {loginIsLoading ? (
                         <>
@@ -339,16 +348,13 @@ export default function LandingPage() {
                 className="w-full max-w-md sticky top-32 lg:top-40 self-start z-10"
               >
                 <Card className="rounded-2xl shadow-2xl overflow-hidden">
-                  <CardHeader className="bg-teal-600 text-white text-center">
-                    <CardTitle className="text-2xl">Create Account</CardTitle>
-                    <CardDescription className="text-blue-100">
-                      Sign up to start your journey
-                    </CardDescription>
+                  <CardHeader className="bg-gradient-to-r from-[#007bff] to-[#0056b3] text-white text-center py-6">
+                    <CardTitle className="text-2xl font-semibold">Create Account</CardTitle>
                   </CardHeader>
 
                   <CardContent className="grid gap-5 pt-6">
                     <div className="grid gap-2">
-                      <Label>Username</Label>
+                      <Label className="text-gray-700 font-semibold">Username:</Label>
                       <Input
                         name="name"
                         type="tel"
@@ -357,17 +363,19 @@ export default function LandingPage() {
                         placeholder="Put your mobile number"
                         value={signupInput.name}
                         onChange={(e) => changeInputHandler(e, "signup")}
+                        className="bg-blue-50 border-gray-200 focus-visible:ring-[#007bff]"
                       />
                     </div>
 
                     <div className="grid gap-2">
-                      <Label>Password</Label>
+                      <Label className="text-gray-700 font-semibold">Password:</Label>
                       <div className="relative">
                         <Input
                           type={showSignupPassword ? "text" : "password"}
                           name="password"
                           value={signupInput.password}
                           onChange={(e) => changeInputHandler(e, "signup")}
+                          className="bg-blue-50 border-gray-200 focus-visible:ring-[#007bff]"
                         />
                         <button
                           type="button"
@@ -388,7 +396,7 @@ export default function LandingPage() {
                           className={cn(
                             "flex-1 py-2 px-4 rounded-lg border-2 transition-all font-semibold text-sm",
                             signupInput.role === "student"
-                              ? "border-teal-600 bg-blue-50 text-teal-600"
+                              ? "border-blue-600 bg-blue-50 text-blue-600"
                               : "border-gray-200 text-gray-400 hover:border-gray-300"
                           )}
                         >
@@ -414,7 +422,7 @@ export default function LandingPage() {
                     <Button
                       // disabled={!isSignupFormValid || registerIsLoading}
                       onClick={() => handleRegistration("signup")}
-                      className="w-full bg-teal-600 hover:bg-teal-700"
+                      className="w-full bg-[#007bff] hover:bg-[#0056b3] text-white rounded-full py-6 font-bold shadow-md text-base"
                     >
                       {registerIsLoading ? (
                         <>

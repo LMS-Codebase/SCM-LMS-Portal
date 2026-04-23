@@ -7,8 +7,8 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
 import { Loader2 } from 'lucide-react';
-import LMSBanner from "../../assets/images/LMSBanner.jpeg";
-import LMSMobileBanner from "../../assets/images/bannerForPhone.jpeg";
+import LMSBanner from "../../assets/images/LandingPageBanner.jpg";
+import LMSMobileBanner from "../../assets/images/LandingPageBanner.jpg";
 
 const ConnectUs = () => {
     const [form, setForm] = useState({
@@ -68,38 +68,48 @@ const ConnectUs = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50 pt-[72px]">
+        <div className="min-h-screen flex flex-col mt-12">
             {/* HERO SECTION matching Landing Page */}
-            <section className="relative w-full">
+            <section className="relative w-full h-[50vh] md:h-[55vh] flex items-center">
                 {/* DESKTOP IMAGE */}
                 <img
                     src={LMSBanner}
                     alt="Desktop Banner"
-                    className="w-full h-auto hidden md:block" // Keeps horizontal for desktop
+                    className="absolute inset-0 w-full h-full object-cover object-center hidden md:block -z-10"
                 />
 
                 {/* MOBILE/TAB IMAGE */}
                 <img
                     src={LMSMobileBanner}
                     alt="Mobile Banner"
-                    className="w-full h-auto block md:hidden" // Naturally takes whatever square space the image natively has
+                    className="absolute inset-0 w-full h-full object-cover object-center block md:hidden -z-10"
                 />
 
-                <div className="absolute inset-0 bg-[#002f4b]/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-[#192A56]/60 pointer-events-none -z-10" />
+
+                {/* BANNER CONTENT */}
+                <div className="px-6 sm:px-12 lg:px-32 w-full z-10 flex flex-col items-start pt-4">
+                    <h1 className="text-4xl sm:text-4xl lg:text-[42px] font-medium text-white mb-3 max-w-4xl tracking-tight drop-shadow-sm">
+                        Supply Chain E-learning Platform
+                    </h1>
+                    <p className="text-base sm:text-lg text-white/95 font-normal tracking-normal max-w-2xl mb-6 drop-shadow-sm">
+                        Empowering Supply Chains Through Smarter Learning
+                    </p>
+                </div>
             </section>
 
             {/* CONTACT FORM CONTAINER */}
             <div className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-8 py-12 flex flex-col justify-start items-center">
 
                 {/* Title Line matches screenshot */}
-                <div className="w-full border-b-[3px] border-teal-500 pb-3 mb-6">
-                    <h1 className="text-3xl md:text-4xl font-bold text-teal-600 uppercase tracking-wide">
+                <div className="w-full border-b-[3px] border-[#007bff] pb-3 mb-6">
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#007bff] uppercase tracking-wide">
                         Contact Us
                     </h1>
                 </div>
 
                 {/* Form Wrapper */}
-                <div className="w-full p-8 md:p-10 bg-teal-100/30 shadow-sm rounded-b-xl rounded-none border border-gray-300">
+                <div className="w-full p-8 md:p-10 shadow-sm rounded-b-xl rounded-none border border-gray-300">
                     <form onSubmit={handleSubmit} className="space-y-5">
 
                         <div className="space-y-1.5 flex flex-col">
@@ -108,7 +118,7 @@ const ConnectUs = () => {
                                 id="name"
                                 type="text"
                                 placeholder="Enter your name"
-                                className={`bg-white focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm h-11 ${errors.name ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
+                                className={`bg-blue-50 focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm h-11 ${errors.name ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
                                 value={form.name}
                                 onChange={(e) => {
                                     setForm({ ...form, name: e.target.value });
@@ -123,7 +133,7 @@ const ConnectUs = () => {
                                 id="mobile"
                                 type="tel"
                                 placeholder="Enter your mobile number"
-                                className={`bg-white focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm h-11 ${errors.mobile ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
+                                className={`bg-blue-50 focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm h-11 ${errors.mobile ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
                                 value={form.mobile}
                                 onChange={(e) => {
                                     setForm({ ...form, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) });
@@ -138,7 +148,7 @@ const ConnectUs = () => {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                className="bg-white border-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm h-11"
+                                className="bg-blue-50 border-none focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm h-11"
                                 value={form.email}
                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                             />
@@ -150,7 +160,7 @@ const ConnectUs = () => {
                                 id="organization"
                                 type="text"
                                 placeholder="Enter your organization"
-                                className="bg-white border-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm h-11"
+                                className="bg-blue-50 border-none focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm h-11"
                                 value={form.organization}
                                 onChange={(e) => setForm({ ...form, organization: e.target.value })}
                             />
@@ -162,7 +172,7 @@ const ConnectUs = () => {
                                 id="designation"
                                 type="text"
                                 placeholder="Enter your designation"
-                                className="bg-white border-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm h-11"
+                                className="bg-blue-50 border-none focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm h-11"
                                 value={form.designation}
                                 onChange={(e) => setForm({ ...form, designation: e.target.value })}
                             />
@@ -173,7 +183,7 @@ const ConnectUs = () => {
                             <Textarea
                                 id="comments"
                                 placeholder="Enter your message or query"
-                                className={`bg-white focus-visible:ring-1 focus-visible:ring-blue-500 rounded-sm min-h-[100px] resize-y p-3 font-mono text-sm ${errors.comments ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
+                                className={`bg-blue-50 focus-visible:ring-1 focus-visible:ring-[#007bff] rounded-sm min-h-[100px] resize-y p-3 font-mono text-sm ${errors.comments ? 'border border-red-500 ring-1 ring-red-500' : 'border-none'}`}
                                 value={form.comments}
                                 onChange={(e) => {
                                     setForm({ ...form, comments: e.target.value });
@@ -186,7 +196,7 @@ const ConnectUs = () => {
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-md h-12 text-base font-medium tracking-wide transition-colors"
+                                className="w-full bg-[#007bff] hover:bg-blue-700 text-white rounded-md h-12 text-base font-medium tracking-wide transition-colors"
                             >
                                 {isLoading ? (
                                     <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>

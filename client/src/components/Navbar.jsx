@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed h-16 dark:bg-[#0A0A0A] bg-white border-b dark:border-b-gray-800 border-b-gray-200 top-0 left-0 right-0 duration-300 z-10 flex items-center justify-between">
+      <div className="fixed h-16 dark:bg-[#0A0A0A] bg-white border-b dark:border-b-gray-800 border-b-gray-200 top-0 left-0 right-0 duration-300 z-20 flex items-center justify-between">
         {/* Link tag is in react-router-dom  */}
         {/* for now : using school tag from lucide-react (automatically come with shadcn/ui)  */}
         {/* <School size={"30"}/>  --->  An icon from lucide-react */}
@@ -72,7 +72,7 @@ const Navbar = () => {
           </Link>
 
           {/* Right side navigation items */}
-          <div className="mr-8 lg:mr-16 flex items-center gap-6 lg:gap-8 font-semibold text-sm text-gray-700">
+          <div className="mr-8 lg:mr-16 flex items-center gap-4 lg:gap-4 font-semibold text-sm text-gray-700">
 
 
             {/* About Us */}
@@ -80,7 +80,7 @@ const Navbar = () => {
               href="https://www.scmconnect.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-teal-600 transition-colors uppercase tracking-wider text-xs"
+              className="hover:bg-[#90A8B8] px-4 py-2 transition-colors text-gray-800 font-semibold text-[17px]"
             >
               About Us
             </a>
@@ -89,7 +89,7 @@ const Navbar = () => {
             {/* Resources */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
+                className="hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to explore resources!");
@@ -108,7 +108,7 @@ const Navbar = () => {
             {/* Connect Us / Contact Us */}
             <div
               onClick={() => navigate("/connect-us")}
-              className="flex items-center gap-2 hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
+              className="flex items-center gap-2 hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
             >
               <span>Contact Us</span>
               {/* <MessageCircleMore size={18} /> */}
@@ -120,7 +120,7 @@ const Navbar = () => {
             {/* Shopping Cart */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="relative flex items-center gap-2 hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
+                className="relative flex items-center gap-2 hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to view your cart!");
@@ -145,7 +145,7 @@ const Navbar = () => {
             {/* My Profile */}
             <div className="flex items-center gap-3 ml-2 border-l pl-6 border-gray-300">
               <span
-                className="hover:text-teal-600 transition-colors cursor-pointer uppercase tracking-wider text-xs"
+                className="hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to manage your profile!");
