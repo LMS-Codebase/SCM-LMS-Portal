@@ -199,7 +199,7 @@ export default function LandingPage() {
           {/* BANNER CONTENT */}
           <div className="px-6 sm:px-12 lg:px-32 w-full z-10 flex flex-col items-start pt-4">
             <h1 className="text-4xl sm:text-4xl lg:text-[42px] font-medium text-white mb-3 max-w-4xl tracking-tight drop-shadow-sm">
-              Supply Chain E-learning Platform
+              Supply Chain E-Learning Platform
             </h1>
             <p className="text-base sm:text-lg text-white/95 font-normal tracking-normal max-w-2xl mb-6 drop-shadow-sm">
               Empowering Supply Chains Through Smarter Learning
