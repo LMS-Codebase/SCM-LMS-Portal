@@ -249,7 +249,7 @@ const Course = ({
           className={`
             overflow-hidden
             rounded-md
-            bg-[#e1fcf9]
+            bg-[#f0f7ff]
             shadow-md
             ${!disableHover ? "hover:shadow-xl" : ""}
             transition-all
@@ -266,7 +266,7 @@ const Course = ({
       w-full
       overflow-hidden
       rounded-t-lg
-      bg-[#a6c7c4]
+      bg-[#d6e8ff]
       flex-shrink-0
 
       h-40        /* mobile */
@@ -290,7 +290,7 @@ const Course = ({
           {/* Card Content */}
           <CardContent className="px-5 py-4 flex flex-col flex-1">
             <div className="flex-1 space-y-2">
-              <h1 className="hover:underline font-bold text-lg line-clamp-2 min-h-[56px]">
+              <h1 className="hover:underline font-bold text-lg line-clamp-2 min-h-[56px]" title={title}>
                 {title}
               </h1>
 
@@ -299,7 +299,7 @@ const Course = ({
                   <h1 className="font-semibold text-sm">{isEbook ? "Author:" : "Trainer:"}</h1>
                   <Avatar className="h-7 w-7 border border-gray-200">
                     <AvatarImage src={instructorAvatar} alt={instructorName} />
-                    <AvatarFallback className="bg-teal-100 text-teal-800 text-xs">
+                    <AvatarFallback className="bg-[#e6f2ff] text-[#005599] text-xs">
                       {instructorName?.charAt(0) || (isEbook ? "A" : "T")}
                     </AvatarFallback>
                   </Avatar>
@@ -324,10 +324,10 @@ const Course = ({
             </div>
 
             <div className="pt-4 mt-auto border-t border-gray-100 flex justify-between items-center">
-              <div className="text-lg font-bold text-teal-900">
+              <div className="text-lg font-bold text-[#005599]">
                 <span className="text-xs font-normal text-gray-500 mr-1">INR</span>{price}
               </div>
-              <Badge className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 text-[10px] uppercase font-bold rounded-full">
+              <Badge className="bg-[#005599] hover:bg-[#004488] text-white px-3 py-1 text-[10px] uppercase font-bold rounded-full">
                 {level}
               </Badge>
             </div>

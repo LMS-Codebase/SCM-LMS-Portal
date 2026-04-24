@@ -79,8 +79,8 @@ const TrendingCarousel = ({ courses }) => {
 
       {/* HEADER */}
       <div className="flex items-center gap-2 px-2 mb-6">
-        <h2 className="text-3xl font-bold">Trending</h2>
-        <TrendingUp size={22} />
+        <h2 className="text-3xl font-bold text-[#005599]">Trending</h2>
+        <TrendingUp size={22} className="text-[#005599]" />
       </div>
 
       {/* LEFT ARROW */}

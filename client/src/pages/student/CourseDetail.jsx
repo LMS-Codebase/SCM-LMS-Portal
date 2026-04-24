@@ -73,7 +73,7 @@ const CourseDetail = () => {
 
     if (isLoading || isProgressLoading) return (
         <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#005599]"></div>
         </div>
     );
 
@@ -169,14 +169,14 @@ const CourseDetail = () => {
             <div className='bg-[#1c1d1f] text-white'>
                 <div className='max-w-7xl mx-auto py-12 px-4 md:px-8 flex flex-col gap-4'>
                     <div className='flex flex-wrap gap-2'>
-                        <Badge className="bg-teal-600 hover:bg-teal-700 border-none">{course.courseLevel}</Badge>
+                        <Badge className="bg-[#005599] hover:bg-[#005599] border-none">{course.courseLevel}</Badge>
                     </div>
                     <h1 className='font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight'>{course.courseTitle}</h1>
                     <p className='text-lg md:text-xl text-gray-300 max-w-3xl'>{course.subTitle || "Master the skills needed to excel in this domain with our comprehensive curriculum."}</p>
 
                     <div className='flex flex-wrap items-center gap-6 mt-2'>
                         <div className='flex items-center gap-2'>
-                            <p className='text-sm'>Created by <span onClick={scrollToInstructor} className='text-teal-400 font-bold hover:underline cursor-pointer'>{course.creator?.name}</span></p>
+                            <p className='text-sm'>Created by <span onClick={scrollToInstructor} className='text-[#3388cc] font-bold hover:underline cursor-pointer'>{course.creator?.name}</span></p>
                         </div>
                         <div className='flex items-center gap-2 text-sm text-gray-400'>
                             <BadgeInfo size={16} className="text-gray-500" />
@@ -209,7 +209,7 @@ const CourseDetail = () => {
                     {(course.commonVideos?.length > 0 || course.commonPdfs?.length > 0) && (
                         <div className='space-y-4 pt-4'>
                             <h2 className='text-2xl font-bold text-gray-900 border-b pb-2 flex items-center gap-2'>
-                                <BadgeInfo size={24} className="text-teal-600" />
+                                <BadgeInfo size={24} className="text-[#005599]" />
                                 <span>Common Resource</span>
                                 <span className="text-sm font-normal text-gray-500 ml-auto">General materials for this course</span>
                             </h2>
@@ -225,9 +225,9 @@ const CourseDetail = () => {
                                         };
 
                                         return (
-                                            <div key={video.public_id || idx} className="flex items-center justify-between p-4 hover:bg-teal-50/30 transition-colors group cursor-pointer">
+                                            <div key={video.public_id || idx} className="flex items-center justify-between p-4 hover:bg-[#f0f7ff] transition-colors group cursor-pointer">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="p-2 bg-teal-50 rounded-lg text-teal-600 group-hover:bg-teal-100">
+                                                    <div className="p-2 bg-[#f0f7ff] rounded-lg text-[#005599] group-hover:bg-[#e6f2ff]">
                                                         <Video size={18} />
                                                     </div>
                                                     <span className="text-sm font-semibold text-gray-700">{video.originalName || `Course Video ${idx + 1}`}</span>
@@ -245,7 +245,7 @@ const CourseDetail = () => {
                                                     className={cn(
                                                         "text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border transition-all shadow-sm",
                                                         hasCourseAccess
-                                                            ? "text-teal-600 bg-teal-50 border-teal-100 hover:bg-teal-600 hover:text-white"
+                                                            ? "text-[#005599] bg-[#f0f7ff] border-[#cce0ff] hover:bg-[#005599] hover:text-white"
                                                             : "text-gray-400 bg-gray-50 border-gray-100 cursor-not-allowed"
                                                     )}
                                                 >
@@ -265,9 +265,9 @@ const CourseDetail = () => {
                                         };
 
                                         return (
-                                            <div key={pdf.public_id || idx} className="flex items-center justify-between p-4 hover:bg-teal-50/30 transition-colors group cursor-pointer">
+                                            <div key={pdf.public_id || idx} className="flex items-center justify-between p-4 hover:bg-[#f0f7ff] transition-colors group cursor-pointer">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="p-2 bg-teal-50 rounded-lg text-teal-600 group-hover:bg-teal-100">
+                                                    <div className="p-2 bg-[#f0f7ff] rounded-lg text-[#005599] group-hover:bg-[#e6f2ff]">
                                                         <FileText size={18} />
                                                     </div>
                                                     <span className="text-sm font-semibold text-gray-700">{pdf.originalName || `Course Resource ${idx + 1}`}</span>
@@ -285,7 +285,7 @@ const CourseDetail = () => {
                                                     className={cn(
                                                         "text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border transition-all shadow-sm",
                                                         hasCourseAccess
-                                                            ? "text-teal-600 bg-teal-50 border-teal-100 hover:bg-teal-600 hover:text-white"
+                                                            ? "text-[#005599] bg-[#f0f7ff] border-[#cce0ff] hover:bg-[#005599] hover:text-white"
                                                             : "text-gray-400 bg-gray-50 border-gray-100 cursor-not-allowed"
                                                     )}
                                                 >
@@ -318,7 +318,7 @@ const CourseDetail = () => {
                                         className={cn(
                                             "border-gray-200 shadow-sm overflow-hidden group transition-all",
                                             !isUnlocked && "opacity-60 cursor-not-allowed grayscale",
-                                            (isCurrent && hasCourseAccess) && "border-teal-500 ring-1 ring-teal-500 bg-teal-50/10"
+                                            (isCurrent && hasCourseAccess) && "border-[#005599] ring-1 ring-[#005599] bg-[#f0f7ff]"
                                         )}
                                     >
                                         <CardHeader className="bg-gray-50/50 py-3 px-4 cursor-pointer hover:bg-gray-100 transition-colors">
@@ -326,11 +326,11 @@ const CourseDetail = () => {
                                                 <div className="flex items-center gap-3">
                                                     <div className={cn(
                                                         "w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold",
-                                                        isCompleted ? "bg-teal-600 text-white" : "bg-gray-200 text-gray-600"
+                                                        isCompleted ? "bg-[#005599] text-white" : "bg-gray-200 text-gray-600"
                                                     )}>
                                                         {isCompleted ? <CheckCircle2 size={14} /> : idx + 1}
                                                     </div>
-                                                    <span className={cn("font-bold", (isCurrent && hasCourseAccess) ? "text-teal-700" : "text-gray-800")}>
+                                                    <span className={cn("font-bold", (isCurrent && hasCourseAccess) ? "text-[#005599]" : "text-gray-800")}>
                                                         {lecture.lectureTitle}
                                                     </span>
                                                 </div>
@@ -348,7 +348,7 @@ const CourseDetail = () => {
                                                 {lecture.videoUrl && (
                                                     <div
                                                         className={cn(
-                                                            "flex items-center justify-between p-4 hover:bg-teal-50/30 transition-colors group/item cursor-pointer",
+                                                            "flex items-center justify-between p-4 hover:bg-[#f0f7ff] transition-colors group/item cursor-pointer",
                                                             !isUnlocked && "pointer-events-none"
                                                         )}
                                                         onClick={() => handleSelectLecture(idx)}
@@ -356,21 +356,21 @@ const CourseDetail = () => {
                                                         <div className="flex items-center gap-4">
                                                             <div className="relative">
                                                                 {isCompleted ? (
-                                                                    <CheckCircle2 size={18} className="text-teal-600" />
+                                                                    <CheckCircle2 size={18} className="text-[#005599]" />
                                                                 ) : (
                                                                     <div className="w-[18px] h-[18px] rounded border-2 border-gray-300" />
                                                                 )}
                                                             </div>
                                                             <div className="flex items-center gap-2">
-                                                                <Video size={16} className={(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-teal-600" : "text-gray-400"} />
-                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-teal-700 font-bold" : "text-gray-700")}>
+                                                                <Video size={16} className={(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-[#005599]" : "text-gray-400"} />
+                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "text-[#005599] font-bold" : "text-gray-700")}>
                                                                     Watch Video
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <span className={cn(
                                                             "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
-                                                            (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "bg-teal-600 text-white" : (isUnlocked ? "bg-teal-50 text-teal-600" : "bg-gray-100 text-gray-500")
+                                                            (isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "bg-[#005599] text-white" : (isUnlocked ? "bg-[#f0f7ff] text-[#005599]" : "bg-gray-100 text-gray-500")
                                                         )}>
                                                             {(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
                                                         </span>
@@ -382,7 +382,7 @@ const CourseDetail = () => {
                                                     <div
                                                         key={subLecture._id || subIdx}
                                                         className={cn(
-                                                            "flex items-center justify-between p-4 pl-12 hover:bg-teal-50/30 transition-colors group/item cursor-pointer border-t border-gray-50",
+                                                            "flex items-center justify-between p-4 pl-12 hover:bg-[#f0f7ff] transition-colors group/item cursor-pointer border-t border-gray-50",
                                                             !isUnlocked && "pointer-events-none"
                                                         )}
                                                         onClick={() => handleSelectSubLecture(idx, subLecture)}
@@ -390,15 +390,15 @@ const CourseDetail = () => {
                                                         <div className="flex items-center gap-4">
                                                             <Circle size={8} className="text-gray-300 fill-gray-300" />
                                                             <div className="flex items-center gap-2">
-                                                                <Video size={14} className={(isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-teal-600" : "text-gray-400"} />
-                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-teal-700 font-bold" : "text-gray-600")}>
+                                                                <Video size={14} className={(isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-[#005599]" : "text-gray-400"} />
+                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "text-[#005599] font-bold" : "text-gray-600")}>
                                                                     {subLecture.title}
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <span className={cn(
                                                             "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
-                                                            (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "bg-teal-600 text-white" : (isUnlocked ? "bg-teal-50 text-teal-600" : "bg-gray-100 text-gray-400")
+                                                            (isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "bg-[#005599] text-white" : (isUnlocked ? "bg-[#f0f7ff] text-[#005599]" : "bg-gray-100 text-gray-400")
                                                         )}>
                                                             {(isCurrent && hasCourseAccess && activeMedia?.url === subLecture.videoUrl) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
                                                         </span>
@@ -417,7 +417,7 @@ const CourseDetail = () => {
                         <h2 className='text-2xl font-bold text-gray-900 border-b pb-2'>About the Instructor</h2>
                         <div className="bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden p-8 flex flex-col md:flex-row gap-8 items-start">
                             <div className="flex flex-col items-center gap-4 shrink-0">
-                                <Avatar className="h-32 w-32 md:h-40 md:w-40 ring-4 ring-teal-50 shadow-lg">
+                                <Avatar className="h-32 w-32 md:h-40 md:w-40 ring-4 ring-[#e6f2ff] shadow-lg">
                                     <AvatarImage
                                         src={course.creator?.photoUrl || "https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small_2x/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"}
                                         className="object-cover"
@@ -425,11 +425,7 @@ const CourseDetail = () => {
                                     <AvatarFallback>{course.creator?.name?.charAt(0)}</AvatarFallback>
                                 </Avatar>
 
-                                <div className="space-y-2 w-full">
-                                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                                        <Phone size={14} className="text-teal-500" />
-                                        <span className="truncate max-w-[150px]">{course.creator?.mobileNo}</span>
-                                    </div>
+                                <div className="space-y-2 w-full mt-2">
                                     <div className="flex flex-wrap gap-2">
                                         {course.creator?.socialLinks?.map((link, i) => (
                                             <a
@@ -437,7 +433,7 @@ const CourseDetail = () => {
                                                 href={link.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="p-2 bg-gray-100 hover:bg-teal-100 text-gray-600 hover:text-teal-700 rounded-lg transition-colors"
+                                                className="p-2 bg-gray-100 hover:bg-[#e6f2ff] text-gray-600 hover:text-[#005599] rounded-lg transition-colors"
                                                 title={link.title}
                                             >
                                                 <Globe size={16} />
@@ -449,40 +445,17 @@ const CourseDetail = () => {
 
                             <div className="flex-1 space-y-4">
                                 <div>
-                                    <h3 className="text-2xl font-bold text-teal-700">{course.creator?.name}</h3>
+                                    <h3 className="text-2xl font-bold text-[#005599]">{course.creator?.name}</h3>
                                     <p className="text-gray-500 font-medium">Instructor</p>
                                 </div>
-                                <div className="flex gap-6 mt-2">
-                                    <div className="flex flex-col gap-1">
-                                        <div className="flex items-center gap-1.5 text-sm font-bold">
-                                            <Star size={16} className="text-yellow-500 fill-yellow-500" />
-                                            <span>{avgRating} Average Rating</span>
-                                            <span className="text-xs font-normal text-gray-400">({courseRatings.length})</span>
-                                        </div>
-                                        {user && (
-                                            <div className="mt-2 flex items-center gap-3 bg-gray-50/50 p-2 rounded-lg border border-gray-100">
-                                                <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Rate Course:</span>
-                                                <div className="flex gap-1">
-                                                    {[1, 2, 3, 4, 5].map((star) => {
-                                                        const userInitialReview = courseRatings.find(r => r.userId === user?._id)?.rating || 0;
-                                                        return (
-                                                            <Star
-                                                                key={star}
-                                                                size={18}
-                                                                onClick={() => handleRateCourse(star)}
-                                                                className={cn(
-                                                                    "cursor-pointer transition-all hover:scale-125 hover:text-yellow-500",
-                                                                    star <= userInitialReview ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
-                                                                )}
-                                                            />
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-                                        )}
+                                <div className="flex flex-wrap items-center gap-6 mt-2">
+                                    <div className="flex items-center gap-1.5 text-sm font-bold">
+                                        <Star size={16} className="text-yellow-500 fill-yellow-500" />
+                                        <span>{avgRating} Average Rating</span>
+                                        <span className="text-xs font-normal text-gray-400">({courseRatings.length})</span>
                                     </div>
-                                    <div className="flex items-center gap-1.5 text-sm font-bold mt-1 h-fit">
-                                        <Users size={16} className="text-teal-500" />
+                                    <div className="flex items-center gap-1.5 text-sm font-bold">
+                                        <Users size={16} className="text-[#005599]" />
                                         <span>{course.enrolledStudents?.length || 0} Students</span>
                                     </div>
                                     <div className="flex items-center gap-1.5 text-sm font-bold">
@@ -490,8 +463,30 @@ const CourseDetail = () => {
                                         <span>{course.lectures?.length || 0} Lectures</span>
                                     </div>
                                 </div>
+
+                                {user && (
+                                    <div className="w-fit mt-4 flex items-center gap-3 bg-gray-50/50 p-2 rounded-lg border border-gray-100">
+                                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Rate Course:</span>
+                                        <div className="flex gap-1">
+                                            {[1, 2, 3, 4, 5].map((star) => {
+                                                const userInitialReview = courseRatings.find(r => r.userId === user?._id)?.rating || 0;
+                                                return (
+                                                    <Star
+                                                        key={star}
+                                                        size={18}
+                                                        onClick={() => handleRateCourse(star)}
+                                                        className={cn(
+                                                            "cursor-pointer transition-all hover:scale-125 hover:text-yellow-500",
+                                                            star <= userInitialReview ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+                                                        )}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
                                 <p className="text-gray-700 leading-relaxed whitespace-pre-wrap italic">
-                                    {course.creator?.bio || "Enthusiastic educator dedicated to making complex supply chain concepts simple and accessible for everyone."}
+                                    {course.creator?.bio || ""}
                                 </p>
                             </div>
                         </div>
@@ -537,7 +532,7 @@ const CourseDetail = () => {
                                             {!hasCourseAccess && (
                                                 <div className='absolute inset-0 bg-black/60 flex items-center justify-center z-20 text-center px-4'>
                                                     <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 text-white text-[11px] md:text-sm uppercase font-bold tracking-widest shadow-2xl flex flex-col items-center gap-3">
-                                                        <Lock size={24} className="text-teal-400" />
+                                                        <Lock size={24} className="text-[#3388cc]" />
                                                         <span>{hasExpired ? "Your access to this course has expired" : "Enroll to unlock this course"}</span>
                                                     </div>
                                                 </div>
@@ -548,7 +543,7 @@ const CourseDetail = () => {
                                 <div className="p-6 space-y-4">
                                     {hasCourseAccess && activeMedia && (
                                         <div className="pb-4 border-b">
-                                            <Badge variant="outline" className="text-[10px] uppercase tracking-tighter text-teal-600 border-teal-200 mb-1">
+                                            <Badge variant="outline" className="text-[10px] uppercase tracking-tighter text-[#005599] border-[#cce0ff] mb-1">
                                                 {activeMedia.type === 'video' ? 'Now Playing' : 'Now Viewing'}
                                             </Badge>
                                             <h3 className="font-bold text-gray-900 line-clamp-2 leading-tight">
@@ -557,11 +552,11 @@ const CourseDetail = () => {
                                         </div>
                                     )}
 
-                                    <div className="flex items-baseline gap-2 pt-2">
-                                        <h1 className='text-3xl font-extrabold text-gray-900'>INR {course.coursePrice}</h1>
-                                        {course.coursePrice > 0 && <span className="text-sm text-gray-400 line-through">INR {course.coursePrice * 2}</span>}
-                                        <span className="text-xs font-bold text-teal-600 ml-auto bg-teal-50 px-2 py-0.5 rounded">50% OFF</span>
-                                    </div>
+                                    {(!isPurchased && !isOwner && !isCourseInCart) && (
+                                        <div className="flex items-baseline gap-2 pt-2">
+                                            <h1 className='text-3xl font-extrabold text-black'>INR {course.coursePrice}</h1>
+                                        </div>
+                                    )}
 
                                     <div className='space-y-3'>
                                         {!hasCourseAccess && (
@@ -571,11 +566,11 @@ const CourseDetail = () => {
                                             <div className="flex flex-col gap-2">
                                                 <div className="flex justify-between text-xs font-bold mb-1">
                                                     <span>Course Progress</span>
-                                                    <span className="text-teal-600">{Math.round((completedLectures.length / course.lectures.length) * 100)}%</span>
+                                                    <span className="text-[#005599]">{Math.round((completedLectures.length / course.lectures.length) * 100)}%</span>
                                                 </div>
                                                 <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
                                                     <div
-                                                        className="bg-teal-600 h-full transition-all duration-500"
+                                                        className="bg-[#005599] h-full transition-all duration-500"
                                                         style={{ width: `${(completedLectures.length / course.lectures.length) * 100}%` }}
                                                     />
                                                 </div>
@@ -586,8 +581,8 @@ const CourseDetail = () => {
                                     <div className="pt-4 space-y-3 border-t">
                                         <p className="text-xs font-bold text-gray-700 uppercase tracking-widest">This course includes:</p>
                                         <ul className="space-y-2">
-                                            <li className="flex items-center gap-2 text-xs text-gray-600"><Play size={14} className="text-teal-500" /> {courseAccessLabel}</li>
-                                            <li className="flex items-center gap-2 text-xs text-gray-600"><BadgeInfo size={14} className="text-teal-500" /> Certificate of completion</li>
+                                            <li className="flex items-center gap-2 text-xs text-gray-600"><Play size={14} className="text-[#005599]" /> {courseAccessLabel}</li>
+                                            <li className="flex items-center gap-2 text-xs text-gray-600"><BadgeInfo size={14} className="text-[#005599]" /> Certificate of completion</li>
                                         </ul>
                                     </div>
                                 </div>

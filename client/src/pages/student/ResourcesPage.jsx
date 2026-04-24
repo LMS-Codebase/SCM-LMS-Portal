@@ -71,6 +71,7 @@ import { useGetPublishedCourseQuery } from "@/features/api/courseApi";
 import { useGetPublishedEbooksQuery } from "@/features/api/ebookApi";
 import TrendingCarousel from "@/components/TrendingCarousel";
 import Course from "./Course";
+import HeroSection from "./HeroSection";
 /* -------------------- DATA -------------------- */
 // const resourceTypes = [
 //   { id: "courses", title: "Courses" },
@@ -151,7 +152,7 @@ const Card = ({ title, image, onClick }) => (
     "
   >
     {/* Heading */}
-    <div className="h-[64px] flex items-center justify-center border-b border-gray-300 bg-teal-800">
+    <div className="h-[64px] flex items-center justify-center border-b border-gray-300 bg-[#005599]">
       <h3 className="text-2xl font-bold tracking-wide text-white">
         {title}
       </h3>
@@ -229,70 +230,71 @@ const ResourcesPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 py-10 w-full">
 
-      {/* Trending Carousel */}
-      {trendingItems.length > 0 && (
-        <TrendingCarousel courses={trendingItems} />
-      )}
+        {/* Trending Carousel */}
+        {trendingItems.length > 0 && (
+          <TrendingCarousel courses={trendingItems} />
+        )}
 
-      {courseIsError && (
-        <div className="text-red-500 text-center my-4 font-semibold italic">
-          Failed to load courses. Please try again.
-        </div>
-      )}
-
-
-      {/* Resource Type */}
-      <section className="mb-14 mt-20">
-        <h2 className="text-3xl font-bold mb-6">Resource</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {resourceData?.resources?.map((item) => (
-            <Card
-              key={item._id}
-              title={item.name}
-              image={item.logo?.url}
-              // onClick={() => {
-              //   // Dynamic navigation based on resource type
-              //   if (item.type === "case-study") {
-              //     navigate("/resources/case-studies");
-              //   } else if (item.type === "ebook") {
-              //     navigate("/resources/ebooks");
-              //   } else if (item.type === "blog") {
-              //     navigate("/resources/blogs");
-              //   } else if (item.type === "course") {
-              //     navigate(`/resources/${item._id}`);
-              //   } else {
-              //     // fallback
-              //     navigate(`/resources/${item._id}`);
-              //   }
-              // }}
-              onClick={() => {
-                navigate(`/explore?resource=${item.name}`);
-              }}
-            />
-          ))}
-        </div>
-      </section>
+        {courseIsError && (
+          <div className="text-red-500 text-center my-4 font-semibold italic">
+            Failed to load courses. Please try again.
+          </div>
+        )}
 
 
-      {/* Domain */}
-      <section className="mb-14">
-        <h2 className="text-3xl font-bold mb-6 mt-20">Domain</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {domainData?.domains?.map((domain) => (
-            <Card
-              key={domain._id}
-              title={domain.name}
-              image={domain.image?.url}
-              onClick={() => navigate(`/explore?domain=${domain.name}`)}
-            />
-          ))}
-        </div>
-      </section>
+        {/* Resource Type */}
+        <section className="mb-14 mt-10">
+          <h2 className="text-3xl font-bold mb-6 text-[#005599]">Resources</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {resourceData?.resources?.map((item) => (
+              <Card
+                key={item._id}
+                title={item.name}
+                image={item.logo?.url}
+                // onClick={() => {
+                //   // Dynamic navigation based on resource type
+                //   if (item.type === "case-study") {
+                //     navigate("/resources/case-studies");
+                //   } else if (item.type === "ebook") {
+                //     navigate("/resources/ebooks");
+                //   } else if (item.type === "blog") {
+                //     navigate("/resources/blogs");
+                //   } else if (item.type === "course") {
+                //     navigate(`/resources/${item._id}`);
+                //   } else {
+                //     // fallback
+                //     navigate(`/resources/${item._id}`);
+                //   }
+                // }}
+                onClick={() => {
+                  navigate(`/explore?resource=${item.name}`);
+                }}
+              />
+            ))}
+          </div>
+        </section>
 
-      {/* Published E-books */}
-      {/* {ebookData?.ebooks?.length > 0 && (
+
+        {/* Domain */}
+        <section className="mb-14">
+          <h2 className="text-3xl font-bold mb-6 mt-20 text-[#005599]">Domains</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {domainData?.domains?.map((domain) => (
+              <Card
+                key={domain._id}
+                title={domain.name}
+                image={domain.image?.url}
+                onClick={() => navigate(`/explore?domain=${domain.name}`)}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Published E-books */}
+        {/* {ebookData?.ebooks?.length > 0 && (
         <section className="mb-14">
           <h2 className="text-3xl font-bold mb-6 mt-20">Recently Published E-Books</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -316,6 +318,7 @@ const ResourcesPage = () => {
           </div>
         </section>
       )} */}
+      </div>
     </div>
   );
 };

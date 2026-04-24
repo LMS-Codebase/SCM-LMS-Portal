@@ -245,11 +245,18 @@ const CourseTab = () => {
           </div>
           <div className="lg:col-span-2 space-y-6">
             <div className="space-y-2">
-              <Label className="font-semibold text-gray-700">Program Title<span className="text-red-500">*</span></Label>
+              <div className="flex items-center justify-between">
+                <Label className="font-semibold text-gray-700">Program Title<span className="text-red-500">*</span></Label>
+                <span className={`text-xs font-bold ${input.courseTitle.length >= 60 ? 'text-red-500' : 'text-gray-500'}`}>
+                  {input.courseTitle.length}/60
+                </span>
+              </div>
               <Input
                 name="courseTitle"
                 value={input.courseTitle}
                 onChange={changeEventHandler}
+                maxLength={60}
+                placeholder="Max 60 characters to fit 2 lines perfectly"
                 className="bg-gray-50/30 font-medium h-11"
               />
             </div>

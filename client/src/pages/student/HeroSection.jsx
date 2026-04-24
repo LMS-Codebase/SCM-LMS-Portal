@@ -1,32 +1,50 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-
+import LMSBanner from "../../assets/images/LandingPageBanner.jpg";
 
 const HeroSection = () => {
-
   const navigate = useNavigate();
 
   return (
-    <div className="relative bg-gradient-to-r from-teal-900 to bg-teal-950 py-16 px-4 text-center">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-white text-4xl font-bold mb-4 mt-8">
-          Find the Best Resource for You
+    <section className="relative w-full h-[50vh] md:h-[55vh] flex items-center justify-center border-b border-[#797b7c] mt-16">
+      {/* BACKGROUND IMAGES */}
+      <img
+        src={LMSBanner}
+        alt="Desktop Banner"
+        className="absolute inset-0 w-full h-full object-cover object-center hidden md:block -z-10"
+      />
+      <img
+        src={LMSBanner}
+        alt="Mobile Banner"
+        className="absolute inset-0 w-full h-full object-cover object-center block md:hidden -z-10"
+      />
+
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-[#192A56]/60 pointer-events-none -z-10" />
+
+      {/* BANNER CONTENT */}
+      <div className="z-10 flex flex-col items-center pt-8 px-6 text-center">
+        <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-medium text-white mb-3 max-w-4xl tracking-tight drop-shadow-sm">
+          Find the Best Resources for You
         </h1>
-        <p className="text-gray-200 mb-8">
+        <p className="text-base sm:text-lg text-white/95 font-normal tracking-normal max-w-2xl mb-8 drop-shadow-sm">
           Discover, Learn, and Upskill with our wide range of resources
         </p>
-        <p className="text-white">Case Studies | E-books | Courses | Blogs</p>
-      </div>
 
-      <div className="mt-10">
-        <Button
-          onClick={() => navigate("/explore")}
-          className="bg-teal-100 text-teal-950 hover:bg-teal-700 hover:text-white text-xl px-7 py-7 rounded-md">
-          Explore
-        </Button>
+        <div className="flex flex-col items-center gap-6">
+          <p className="text-white/95 font-semibold tracking-wide">
+            Case Studies | E-books | Courses | Blogs
+          </p>
+          <Button
+            onClick={() => navigate("/explore")}
+            className="bg-[#007bff] hover:bg-[#0056b3] text-white text-lg px-8 py-6 rounded-full font-bold shadow-md transition-all"
+          >
+            Explore
+          </Button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -208,15 +208,19 @@ export default function LandingPage() {
         </section>
 
         {/* CONTENT */}
-        <section className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 px-6 sm:px-12 lg:px-28 py-12 lg:py-16 bg-white">
+        <section className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 px-6 sm:px-12 lg:px-20 py-12 lg:py-12 bg-white">
           <div className="flex-1" >
             <div>
-              <h1 className="text-2xl font-bold text-gray-700">Capability Building for Modern Supply Chains</h1>
-              <h2 className="text-xl font-bold text-gray-700 mt-8">Overview</h2>
-              <p className="text-gray-600 space-y-4 mt-2">SCM Learning & Development is the capability enhancement initiative of SCM Connect, designed to build structured, practical, and performance-driven supply chain competencies.<br />
+              <div className="w-full border-b-[5px] border-black pb-2 mb-6">
+                <h1 className="text-3xl md:text-[48px] leading-[50px] [word-spacing:0.25rem] font-semibold tracking-normal text-[#005599] uppercase">
+                  Capability Building for Modern Supply Chains
+                </h1>
+              </div>
+              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Overview</h2>
+              <p className="text-gray-600 space-y-4 mt-2 text-[17px] line-height-[20px]">SCM Learning & Development is the capability enhancement initiative of SCM Connect, designed to build structured, practical, and performance-driven supply chain competencies.<br />
                 Our programs are developed and delivered by industry practitioners, with a clear focus on execution, measurable outcomes, and business impact.
               </p>
-              <h2 className="text-xl font-bold text-gray-700 mt-8">-	Our Focus Areas</h2>
+              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Our Focus Areas</h2>
               <ul className="list-disc ml-8 text-gray-600 mt-2">
                 <li>Supply Chain Strategy & Operating Models</li>
                 <li>Demand Planning & Forecasting</li>
@@ -227,7 +231,7 @@ export default function LandingPage() {
                 <li>Supply Chain Analytics & Digital Transformation</li>
               </ul>
 
-              <h2 className="text-xl font-bold text-gray-700 mt-8">Learning essentials</h2>
+              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Learning Essentials</h2>
               <p className="text-gray-600 mt-2">Our methodology emphasizes clarity, structure, and application.</p>
               <ul className="list-disc ml-8 text-gray-600">
                 <li>Industry-led curriculum</li>
@@ -237,16 +241,16 @@ export default function LandingPage() {
               </ul>
 
 
-              <h2 className="text-xl font-bold text-gray-700 mt-10">Program Formats</h2>
-              <h3 className="text-lg font-bold text-gray-700 mt-2">Corporate Training Programs</h3>
+              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Program Formats :</h2>
+              <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Corporate Training Programs</h3>
               <p className="text-gray-600 mt-2">Customized interventions aligned to process, function, or leadership level.</p>
-              <h3 className="text-lg font-bold text-gray-700 mt-2">Executive Workshops</h3>
+              <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Executive Workshops</h3>
               <p className="text-gray-600 mt-2">Focused sessions for senior management on strategy, transformation, and performance improvement.</p>
-              <h3 className="text-lg font-bold text-gray-700 mt-2">Certification Programs</h3>
+              <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Certification Programs</h3>
               <p className="text-gray-600 mt-2">Industry-recognized certifications to validate and enhance supply chain expertise.</p>
-              <h3 className="text-lg font-bold text-gray-700 mt- 2">Embedded Learning Engagements</h3>
+              <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Embedded Learning Engagements</h3>
               <p className="text-gray-600 mt-2">Capability development integrated within live projects and transformation initiatives.</p>
-              <h3 className="text-lg font-bold text-gray-700 mt-2">Intended Audience</h3>
+              <h3 className="text-[18px] font-semibold text-[#495057] mt-8 line-height-[20px]">Intended Audience</h3>
               <ul className="list-disc ml-8 text-gray-600">
                 <li>Supply Chain & Operations Leaders</li>
                 <li>Planning & Procurement Teams</li>

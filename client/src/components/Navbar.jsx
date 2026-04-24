@@ -80,7 +80,7 @@ const Navbar = () => {
               href="https://www.scmconnect.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:bg-[#90A8B8] px-4 py-2 transition-colors text-gray-800 font-semibold text-[17px]"
+              className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors text-[17px]"
             >
               About Us
             </a>
@@ -89,7 +89,7 @@ const Navbar = () => {
             {/* Resources */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
+                className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to explore resources!");
@@ -108,7 +108,7 @@ const Navbar = () => {
             {/* Connect Us / Contact Us */}
             <div
               onClick={() => navigate("/connect-us")}
-              className="flex items-center gap-2 hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
+              className="flex items-center gap-2 px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
             >
               <span>Contact Us</span>
               {/* <MessageCircleMore size={18} /> */}
@@ -120,7 +120,7 @@ const Navbar = () => {
             {/* Shopping Cart */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="relative flex items-center gap-2 hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
+                className="relative flex items-center gap-2 px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to view your cart!");
@@ -145,7 +145,7 @@ const Navbar = () => {
             {/* My Profile */}
             <div className="flex items-center gap-3 ml-2 border-l pl-6 border-gray-300">
               <span
-                className="hover:bg-[#90A8B8] px-4 py-2 transition-colors cursor-pointer text-gray-800 font-semibold text-[17px]"
+                className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to manage your profile!");
@@ -161,7 +161,7 @@ const Navbar = () => {
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Avatar className="cursor-pointer border-2 border-transparent hover:border-teal-500 transition-all h-9 w-9 shadow-sm">
+                    <Avatar className="cursor-pointer border-2 border-transparent hover:border-[#005599] transition-all h-9 w-9 shadow-sm">
                       <AvatarImage
                         className="object-contain w-full h-full bg-gray-100"
                         src={
@@ -200,7 +200,7 @@ const Navbar = () => {
                 </DropdownMenu>
               ) : (
                 <Avatar
-                  className="cursor-pointer border-2 border-gray-200 hover:border-teal-500 transition-all h-9 w-9 shadow-sm"
+                  className="cursor-pointer border-2 border-gray-200 hover:border-[#005599] transition-all h-9 w-9 shadow-sm"
                   onClick={() => {
                     toast.info("Please log in to access your dashboard!");
                     navigate("/");
@@ -264,7 +264,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
           {/* Resources */}
           {(!user || user?.role !== "instructor") && (
             <div
-              className="hover:text-teal-600 transition-colors cursor-pointer"
+              className="hover:text-[#005599] transition-colors cursor-pointer"
               onClick={() => {
                 if (!user) {
                   toast.info("Please log in to explore resources!");
@@ -279,13 +279,13 @@ const MobileNavbar = ({ user, logoutHandler }) => {
           )}
 
           {/* About Us */}
-          <a href="https://www.scmconnect.in" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">
+          <a href="https://www.scmconnect.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#005599] transition-colors">
             About Us
           </a>
 
           {/* Connect Us / Contact Us */}
           <div
-            className="hover:text-teal-600 transition-colors cursor-pointer"
+            className="hover:text-[#005599] transition-colors cursor-pointer"
             onClick={() => navigate("/connect-us")}
           >
             Contact Us
@@ -296,7 +296,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
           {/* Cart */}
           {(!user || user?.role !== "instructor") && (
             <div
-              className="flex items-center justify-between hover:text-teal-600 transition-colors cursor-pointer"
+              className="flex items-center justify-between hover:text-[#005599] transition-colors cursor-pointer"
               onClick={() => {
                 if (!user) {
                   toast.info("Please log in to view your cart!");
@@ -318,7 +318,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
           {/* My Learning (Student Only) */}
           {user?.role === "student" && (
             <div
-              className="hover:text-teal-600 transition-colors cursor-pointer"
+              className="hover:text-[#005599] transition-colors cursor-pointer"
               onClick={() => navigate("/my-learning")}
             >
               My Learning
@@ -327,7 +327,7 @@ const MobileNavbar = ({ user, logoutHandler }) => {
 
           {/* Profile options */}
           <div
-            className="hover:text-teal-600 transition-colors cursor-pointer"
+            className="hover:text-[#005599] transition-colors cursor-pointer"
             onClick={() => {
               if (!user) {
                 toast.info("Please log in to manage your profile!");

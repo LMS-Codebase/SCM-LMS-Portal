@@ -55,7 +55,7 @@ const BuyCourseButton = ({ courseId, coursePrice = 0 }) => {
       disabled={isLoading || isFreeEnrollLoading}
       onClick={isFreeCourse ? handleGetFreeCourse : handleToggleCart}
       variant={!isFreeCourse && isInCart ? "outline" : "default"}
-      className={!isFreeCourse && isInCart ? 'w-full h-12 font-bold border-teal-600 text-teal-700 hover:bg-teal-50 shadow-none' : 'w-full bg-teal-600 hover:bg-teal-700 font-bold h-12 shadow-lg shadow-teal-50'}
+      className={!isFreeCourse && isInCart ? 'w-full h-12 font-bold border-black text-black hover:bg-gray-800 shadow-none' : 'w-full bg-black hover:bg-gray-800 font-bold h-12 shadow-lg'}
     >
       {isLoading || isFreeEnrollLoading ? (
         <Loader2 className='mr-2 h-4 w-4 animate-spin' />
