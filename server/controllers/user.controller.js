@@ -4,7 +4,7 @@ import { Ebook } from "../models/ebook.model.js";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
-import { deleteMediaFromCloudinary, uploadMedia, extractPublicId } from "../utils/s3.js";
+import { deleteMediaFromCloudinary, uploadMedia, extractPublicId, getApiBaseUrl } from "../utils/s3.js";
 
 //                                                          Register
 export const register = async (req, res) => {
@@ -214,7 +214,7 @@ export const updateProfile = async (req, res) => {
       }
       // Set new photo from S3
       const fileKey = profilePhoto.key;
-      photoUrl = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
+      photoUrl = `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
     }
 
     // Prepare updated data

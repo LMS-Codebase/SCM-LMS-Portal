@@ -16,6 +16,14 @@ export const domainApi = createApi({
       }),
       invalidatesTags: ["Domain"],
     }),
+    updateDomainThumbnail: builder.mutation({
+      query: ({ domainId, formData }) => ({
+        url: `${domainId}/thumbnail`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: ["Domain"],
+    }),
     getDomains: builder.query({
       query: () => ({
         url: "",
@@ -29,4 +37,5 @@ export const domainApi = createApi({
 export const {
   useCreateDomainMutation,
   useGetDomainsQuery,
+  useUpdateDomainThumbnailMutation,
 } = domainApi;

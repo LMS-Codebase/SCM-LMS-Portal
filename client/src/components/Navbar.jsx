@@ -80,7 +80,7 @@ const Navbar = () => {
               href="https://www.scmconnect.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors text-[17px]"
+              className="block px-3 py-2 text-[#333333] tracking-tighter font-regular font-style:normal hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
             >
               About Us
             </a>
@@ -89,7 +89,7 @@ const Navbar = () => {
             {/* Resources */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
+                className="block px-3 py-2 text-[#333333] tracking-tighter font-regular font-style:normal hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to explore resources!");
@@ -108,7 +108,7 @@ const Navbar = () => {
             {/* Connect Us / Contact Us */}
             <div
               onClick={() => navigate("/connect-us")}
-              className="flex items-center gap-2 px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
+              className="flex items-center gap-2 px-3 py-2 text-[#333333] tracking-tighter font-regular font-style:normal hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
             >
               <span>Contact Us</span>
               {/* <MessageCircleMore size={18} /> */}
@@ -120,7 +120,7 @@ const Navbar = () => {
             {/* Shopping Cart */}
             {(!user || user?.role !== "instructor") && (
               <div
-                className="relative flex items-center gap-2 px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
+                className="relative flex items-center gap-2 px-3 py-2 text-[#333333] tracking-tighter font-regular font-style:normal hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to view your cart!");
@@ -145,7 +145,7 @@ const Navbar = () => {
             {/* My Profile */}
             <div className="flex items-center gap-3 ml-2 border-l pl-6 border-gray-300">
               <span
-                className="block px-3 py-2 text-black/80 tracking-tight font-regular hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
+                className="block px-3 py-2 text-[#333333] tracking-tighter font-regular font-style:normal hover:bg-[#90A8B8] transition-colors cursor-pointer text-[17px]"
                 onClick={() => {
                   if (!user) {
                     toast.info("Please log in to manage your profile!");

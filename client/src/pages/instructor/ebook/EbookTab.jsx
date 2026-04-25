@@ -39,6 +39,11 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import {
+    CARD_TITLE_MAX_CHARS,
+    getCardTitleValidationError,
+    normalizeCardTitle,
+} from "@/lib/titleValidation";
 
 const EbookTab = () => {
     const [input, setInput] = useState({
@@ -148,13 +153,20 @@ const EbookTab = () => {
 
     const updateEbookHandler = async () => {
         try {
+            const titleError = getCardTitleValidationError(input.title);
+
             if (!input.resource || input.domain.length === 0) {
                 toast.error("Resource classification and at least one Domain must be selected.");
                 return;
             }
 
+            if (titleError) {
+                toast.error(titleError);
+                return;
+            }
+
             const formData = new FormData();
-            formData.append("title", input.title);
+            formData.append("title", normalizeCardTitle(input.title));
             formData.append("description", input.description);
             formData.append("authorName", input.authorName);
             formData.append("authorBio", input.authorBio);
@@ -229,11 +241,17 @@ const EbookTab = () => {
                     </div>
                     <div className="lg:col-span-2 space-y-6">
                         <div className="space-y-2">
-                            <Label className="font-semibold text-gray-700">E-Book Title<span className="text-red-500">*</span></Label>
+                            <div className="flex items-center justify-between gap-4">
+                                <Label className="font-semibold text-gray-700">E-Book Title<span className="text-red-500">*</span></Label>
+                                <span className={`text-xs font-bold ${input.title.length >= CARD_TITLE_MAX_CHARS ? "text-red-500" : "text-gray-500"}`}>
+                                    Max {input.title.length}/{CARD_TITLE_MAX_CHARS}
+                                </span>
+                            </div>
                             <Input
                                 name="title"
                                 value={input.title}
                                 onChange={changeEventHandler}
+                                maxLength={CARD_TITLE_MAX_CHARS}
                                 className="bg-gray-50/30 font-medium"
                             />
                         </div>

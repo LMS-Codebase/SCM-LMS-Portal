@@ -11,6 +11,9 @@ const courseSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    whatWillYouLearn: {
+        type: String,
+    },
 
     courseLevel: {
         type: String,

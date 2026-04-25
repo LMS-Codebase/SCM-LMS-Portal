@@ -10,10 +10,10 @@ export const ProtectedRoute = ({ children }) => {
         return (
             <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
                 <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
-                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
-                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                <p className="text-gray-600 font-medium text-lg">Loading...</p>
+                {/* <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
                     Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
-                </p>
+                </p> */}
             </div>
         );
     }
@@ -34,10 +34,10 @@ export const StudentRoute = ({ children }) => {
         return (
             <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
                 <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
-                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
-                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                <p className="text-gray-600 font-medium text-lg">Loading...</p>
+                {/* <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
                     Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
-                </p>
+                </p> */}
             </div>
         );
     }
@@ -63,10 +63,10 @@ export const InstructorRoute = ({ children }) => {
         return (
             <div className="flex flex-col h-screen w-full items-center justify-center bg-gray-50">
                 <Loader2 className="h-10 w-10 animate-spin text-teal-600 mb-4" />
-                <p className="text-gray-600 font-medium text-lg">Connecting to server...</p>
-                <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
+                <p className="text-gray-600 font-medium text-lg">Loading...</p>
+                {/* <p className="text-gray-400 text-sm mt-2 max-w-sm text-center">
                     Note: If this is the first visit in a while, it may take up to 50 seconds for the backend to wake up.
-                </p>
+                </p> */}
             </div>
         );
     }

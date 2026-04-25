@@ -290,7 +290,7 @@ const Course = ({
           {/* Card Content */}
           <CardContent className="px-5 py-4 flex flex-col flex-1">
             <div className="flex-1 space-y-2">
-              <h1 className="hover:underline font-bold text-lg line-clamp-2 min-h-[56px]" title={title}>
+              <h1 className="hover:underline font-bold text-lg leading-7 min-h-[56px] max-h-[56px] overflow-hidden break-words" title={title}>
                 {title}
               </h1>
 

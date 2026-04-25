@@ -2,7 +2,7 @@ import BuyCourseButton from '@/components/BuyCourseButton'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { BadgeInfo, Lock, PlayCircle, GraduationCap, Phone, Globe, Users, Star, Play, Video, FileText, CheckCircle2, Circle } from 'lucide-react'
+import { BadgeInfo, Lock, PlayCircle, GraduationCap, Phone, Globe, Users, Star, Play, Video, FileText, FileSpreadsheet, CheckCircle2, Circle } from 'lucide-react'
 import React, { useRef, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetCourseByIdQuery, useRateCourseMutation } from '@/features/api/courseApi'
@@ -105,6 +105,12 @@ const CourseDetail = () => {
     const completedLectures = progressData?.data?.progress?.map(p => p.lectureId) || [];
     const currentLecture = course.lectures?.[currentLectureIndex];
 
+    const cleanRichTextHtml = (html = "") =>
+        html
+            .replace(/<p>(\s|&nbsp;|<br\s*\/?>)*<\/p>/gi, "")
+            .replace(/<p><\/p>/gi, "")
+            .trim();
+
     const markAsCompleted = async (lectureId) => {
         try {
             await updateLectureProgress({ courseId, lectureId }).unwrap();
@@ -163,6 +169,13 @@ const CourseDetail = () => {
         }
     };
 
+    const handleLockedResourceClick = (e) => {
+        if (!hasCourseAccess) {
+            e.preventDefault();
+            toast.error("Please enroll in the course to access this resource.");
+        }
+    };
+
     return (
         <div className='mt-24 space-y-10 pb-20'>
             {/* HERO SECTION */}
@@ -199,11 +212,23 @@ const CourseDetail = () => {
                         <h2 className='text-2xl font-bold text-gray-900 border-b pb-2'>Description</h2>
                         <div className="ql-snow">
                             <div
-                                className="ql-editor p-0 text-gray-700 leading-relaxed prose prose-teal max-w-none"
-                                dangerouslySetInnerHTML={{ __html: course.description }}
+                                className="ql-editor !p-0 text-gray-700 leading-relaxed max-w-none [&_p]:m-0 [&_p+p]:mt-0 [&_ul]:ml-0 [&_ol]:ml-0 [&_ul]:pl-0 [&_ol]:pl-0"
+                                dangerouslySetInnerHTML={{ __html: cleanRichTextHtml(course.description) }}
                             />
                         </div>
                     </div>
+
+                    {cleanRichTextHtml(course.whatWillYouLearn) && (
+                    <div className='space-y-4'>
+                        <h2 className='text-2xl font-bold text-gray-900 border-b pb-2'>What Will You Learn?</h2>
+                        <div className="ql-snow">
+                            <div
+                                className="ql-editor !p-0 text-gray-700 leading-relaxed max-w-none [&_p]:m-0 [&_p+p]:mt-0 [&_ul]:ml-0 [&_ol]:ml-0 [&_ul]:pl-0 [&_ol]:pl-0"
+                                dangerouslySetInnerHTML={{ __html: cleanRichTextHtml(course.whatWillYouLearn) }}
+                            />
+                        </div>
+                    </div>
+                    )}
 
                     {/* COMMON RESOURCES SECTION */}
                     {(course.commonVideos?.length > 0 || course.commonPdfs?.length > 0) && (
@@ -374,6 +399,73 @@ const CourseDetail = () => {
                                                         )}>
                                                             {(isCurrent && hasCourseAccess && activeMedia?.url === lecture.videoUrl) ? "Playing" : isUnlocked ? "Unlocked" : "Locked"}
                                                         </span>
+                                                    </div>
+                                                )}
+
+                                                {lecture.pdfUrl && (
+                                                    <div
+                                                        className={cn(
+                                                            "flex items-center justify-between p-4 hover:bg-[#f0f7ff] transition-colors group/item border-t border-gray-50",
+                                                            !isUnlocked && "pointer-events-none"
+                                                        )}
+                                                    >
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="w-[18px] h-[18px] rounded border-2 border-gray-300" />
+                                                            <div className="flex items-center gap-2">
+                                                                <FileText size={16} className={(isCurrent && hasCourseAccess && activeMedia?.url === lecture.pdfUrl) ? "text-[#005599]" : "text-gray-400"} />
+                                                                <span className={cn("text-sm font-medium", (isCurrent && hasCourseAccess && activeMedia?.url === lecture.pdfUrl) ? "text-[#005599] font-bold" : "text-gray-700")}>
+                                                                    Lecture PDF
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <a
+                                                            href={hasCourseAccess ? lecture.pdfUrl : "#"}
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                handleLockedResourceClick(e);
+                                                                if (hasCourseAccess) {
+                                                                    setActiveMedia({ type: 'pdf', url: lecture.pdfUrl, title: `${lecture.lectureTitle} PDF`, isLecture: false });
+                                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                                }
+                                                            }}
+                                                            className={cn(
+                                                                "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
+                                                                (isCurrent && hasCourseAccess && activeMedia?.url === lecture.pdfUrl) ? "bg-[#005599] text-white" : (isUnlocked ? "bg-[#f0f7ff] text-[#005599]" : "bg-gray-100 text-gray-500")
+                                                            )}
+                                                        >
+                                                            View PDF
+                                                        </a>
+                                                    </div>
+                                                )}
+
+                                                {lecture.excelUrl && (
+                                                    <div
+                                                        className={cn(
+                                                            "flex items-center justify-between p-4 hover:bg-[#f0f7ff] transition-colors group/item border-t border-gray-50",
+                                                            !isUnlocked && "pointer-events-none"
+                                                        )}
+                                                    >
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="w-[18px] h-[18px] rounded border-2 border-gray-300" />
+                                                            <div className="flex items-center gap-2">
+                                                                <FileSpreadsheet size={16} className="text-gray-400" />
+                                                                <span className="text-sm font-medium text-gray-700">
+                                                                    Lecture Excel
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <a
+                                                            href={hasCourseAccess ? lecture.excelUrl : "#"}
+                                                            target={hasCourseAccess ? "_blank" : undefined}
+                                                            rel={hasCourseAccess ? "noopener noreferrer" : undefined}
+                                                            onClick={(e) => handleLockedResourceClick(e)}
+                                                            className={cn(
+                                                                "text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded",
+                                                                isUnlocked ? "bg-[#eefbf3] text-[#15803d]" : "bg-gray-100 text-gray-500"
+                                                            )}
+                                                        >
+                                                            Download XLS
+                                                        </a>
                                                     </div>
                                                 )}
 

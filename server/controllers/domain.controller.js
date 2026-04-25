@@ -63,7 +63,7 @@
 
 
 import Domain from "../models/domain.model.js";
-import { uploadMedia } from "../utils/s3.js";
+import { deleteMediaFromCloudinary, getApiBaseUrl } from "../utils/s3.js";
 
 export const createDomain = async (req, res) => {
   try {
@@ -90,7 +90,7 @@ export const createDomain = async (req, res) => {
     try {
       const fileKey = req.file.key;
       imageData = {
-        url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
+        url: `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
         public_id: fileKey,
       };
     } catch (cloudErr) {
@@ -132,6 +132,52 @@ export const getDomains = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch domains",
+      error: error.message,
+    });
+  }
+};
+
+export const updateDomainThumbnail = async (req, res) => {
+  try {
+    const { domainId } = req.params;
+
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Thumbnail is required",
+      });
+    }
+
+    const domain = await Domain.findById(domainId);
+    if (!domain) {
+      return res.status(404).json({
+        success: false,
+        message: "Domain not found",
+      });
+    }
+
+    if (domain.image?.public_id) {
+      await deleteMediaFromCloudinary(domain.image.public_id);
+    }
+
+    const fileKey = req.file.key;
+    domain.image = {
+      url: `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`,
+      public_id: fileKey,
+    };
+
+    await domain.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Domain thumbnail updated successfully",
+      domain,
+    });
+  } catch (error) {
+    console.error("updateDomainThumbnail error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update domain thumbnail",
       error: error.message,
     });
   }

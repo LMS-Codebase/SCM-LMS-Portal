@@ -44,12 +44,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useGetPublishedResourcesQuery } from "@/features/api/resourceApi";
 import { useGetDomainsQuery } from "@/features/api/domainApi";
+import {
+  CARD_TITLE_MAX_CHARS,
+  getCardTitleValidationError,
+  normalizeCardTitle,
+} from "@/lib/titleValidation";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
     courseTitle: "",
     subTitle: "",
     description: "",
+    whatWillYouLearn: "",
     courseLevel: "",
     coursePrice: "",
     courseDuration: "",
@@ -75,6 +81,7 @@ const CourseTab = () => {
         courseTitle: course.courseTitle || "",
         subTitle: course.subTitle || "",
         description: course.description || "",
+        whatWillYouLearn: course.whatWillYouLearn || "",
         courseLevel: course.courseLevel || "",
         coursePrice: course.coursePrice !== undefined && course.coursePrice !== null ? course.coursePrice : "",
         courseDuration: course.courseDuration || "",
@@ -168,11 +175,19 @@ const CourseTab = () => {
 
   const updateCourseHandler = async () => {
     try {
-      const formData = new FormData();
-      formData.append("courseTitle", input.courseTitle);
+      const titleError = getCardTitleValidationError(input.courseTitle);
 
-      if (input.subTitle) formData.append("subTitle", input.subTitle);
-      if (input.description) formData.append("description", input.description);
+      if (titleError) {
+        toast.error(titleError);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("courseTitle", normalizeCardTitle(input.courseTitle));
+
+      formData.append("subTitle", input.subTitle || "");
+      formData.append("description", input.description || "");
+      formData.append("whatWillYouLearn", input.whatWillYouLearn || "");
       if (input.courseLevel) formData.append("courseLevel", input.courseLevel);
       if (input.validityPeriod) formData.append("validityPeriod", input.validityPeriod);
       if (input.courseDuration) formData.append("courseDuration", input.courseDuration);
@@ -247,16 +262,16 @@ const CourseTab = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label className="font-semibold text-gray-700">Program Title<span className="text-red-500">*</span></Label>
-                <span className={`text-xs font-bold ${input.courseTitle.length >= 60 ? 'text-red-500' : 'text-gray-500'}`}>
-                  {input.courseTitle.length}/60
+                <span className={`text-xs font-bold ${input.courseTitle.length >= CARD_TITLE_MAX_CHARS ? 'text-red-500' : 'text-gray-500'}`}>
+                  Max {input.courseTitle.length}/{CARD_TITLE_MAX_CHARS}
                 </span>
               </div>
               <Input
                 name="courseTitle"
                 value={input.courseTitle}
                 onChange={changeEventHandler}
-                maxLength={60}
-                placeholder="Max 60 characters to fit 2 lines perfectly"
+                maxLength={CARD_TITLE_MAX_CHARS}
+                placeholder="Use a short title for the course card"
                 className="bg-gray-50/30 font-medium h-11"
               />
             </div>
@@ -273,6 +288,12 @@ const CourseTab = () => {
               <Label className="font-semibold text-gray-700">Comprehensive Curriculum Overview</Label>
               <div className="bg-gray-50/10 rounded-xl overflow-hidden border">
                 <RichTextEditor input={input} setInput={setInput} />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label className="font-semibold text-gray-700">What Will You Learn?</Label>
+              <div className="bg-gray-50/10 rounded-xl overflow-hidden border">
+                <RichTextEditor input={input} setInput={setInput} field="whatWillYouLearn" />
               </div>
             </div>
           </div>

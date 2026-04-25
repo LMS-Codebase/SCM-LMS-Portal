@@ -14,6 +14,11 @@ import { Loader2, BookPlus, ArrowLeft } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import {
+    CARD_TITLE_MAX_CHARS,
+    getCardTitleValidationError,
+    normalizeCardTitle,
+} from "@/lib/titleValidation";
 
 const AddEbook = () => {
     const [title, setTitle] = useState("");
@@ -26,11 +31,19 @@ const AddEbook = () => {
     const navigate = useNavigate();
 
     const createEbookHandler = async () => {
+        const titleError = getCardTitleValidationError(title);
+
         if (!title || !authorName || !description || !price) {
             toast.error("Please fill in all the required fields.");
             return;
         }
-        await addEbook({ title, authorName, description, price: Number(price), validityPeriod });
+
+        if (titleError) {
+            toast.error(titleError);
+            return;
+        }
+
+        await addEbook({ title: normalizeCardTitle(title), authorName, description, price: Number(price), validityPeriod });
     };
 
     useEffect(() => {
@@ -71,9 +84,11 @@ const AddEbook = () => {
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="e.g. Supply Chain Terms Made Simple"
+                            maxLength={CARD_TITLE_MAX_CHARS}
+                            placeholder="e.g. Supply Chain Basics"
                             className="focus-visible:ring-teal-500 border-gray-200"
                         />
+                        <p className="text-xs text-gray-500">Max {title.length}/{CARD_TITLE_MAX_CHARS}</p>
                     </div>
                     <div className="space-y-2">
                         <Label className="text-gray-700 font-semibold uppercase tracking-wider text-[11px]">Author Name<span className="text-red-500 text-lg">*</span></Label>

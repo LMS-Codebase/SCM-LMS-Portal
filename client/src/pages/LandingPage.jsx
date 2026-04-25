@@ -212,7 +212,7 @@ export default function LandingPage() {
           <div className="flex-1" >
             <div>
               <div className="w-full border-b-[5px] border-black pb-2 mb-6">
-                <h1 className="text-3xl md:text-[48px] leading-[50px] [word-spacing:0.25rem] font-semibold tracking-normal text-[#005599] uppercase">
+                <h1 className="text-3xl md:text-[48px] tracking-[-0.02em] leading-[50px] font-semibold text-[#005599] uppercase">
                   Capability Building for Modern Supply Chains
                 </h1>
               </div>
@@ -241,7 +241,7 @@ export default function LandingPage() {
               </ul>
 
 
-              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Program Formats :</h2>
+              <h2 className="text-[20px] font-semibold text-[#495057] mt-8 line-height-[20px]">Program Formats</h2>
               <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Corporate Training Programs</h3>
               <p className="text-gray-600 mt-2">Customized interventions aligned to process, function, or leadership level.</p>
               <h3 className="text-[18px] font-semibold text-[#495057] mt-2 line-height-[20px]">Executive Workshops</h3>

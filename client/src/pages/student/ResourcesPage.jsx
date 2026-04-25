@@ -71,7 +71,7 @@ import { useGetPublishedCourseQuery } from "@/features/api/courseApi";
 import { useGetPublishedEbooksQuery } from "@/features/api/ebookApi";
 import TrendingCarousel from "@/components/TrendingCarousel";
 import Course from "./Course";
-import HeroSection from "./HeroSection";
+import { getFallbackImageUrl, getPublicImageUrl } from "@/lib/mediaUrl";
 /* -------------------- DATA -------------------- */
 // const resourceTypes = [
 //   { id: "courses", title: "Courses" },
@@ -165,6 +165,12 @@ const Card = ({ title, image, onClick }) => (
           src={image}
           alt={title}
           className="w-full h-full object-cover object-center"
+          onError={(e) => {
+            const fallbackUrl = getFallbackImageUrl(image);
+            if (fallbackUrl && e.currentTarget.src !== fallbackUrl) {
+              e.currentTarget.src = fallbackUrl;
+            }
+          }}
         />
       </div>
     </div>
@@ -253,7 +259,7 @@ const ResourcesPage = () => {
               <Card
                 key={item._id}
                 title={item.name}
-                image={item.logo?.url}
+                image={getPublicImageUrl(item.logo?.url)}
                 // onClick={() => {
                 //   // Dynamic navigation based on resource type
                 //   if (item.type === "case-study") {
@@ -286,7 +292,7 @@ const ResourcesPage = () => {
               <Card
                 key={domain._id}
                 title={domain.name}
-                image={domain.image?.url}
+                image={getPublicImageUrl(domain.image?.url)}
                 onClick={() => navigate(`/explore?domain=${domain.name}`)}
               />
             ))}

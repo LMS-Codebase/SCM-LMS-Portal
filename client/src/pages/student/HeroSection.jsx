@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative w-full h-[50vh] md:h-[55vh] flex items-center justify-center border-b border-[#797b7c] mt-16">
+    <section className="relative w-full h-[50vh] md:h-[55vh] flex items-center mt-12">
       {/* BACKGROUND IMAGES */}
       <img
         src={LMSBanner}
@@ -24,7 +24,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-[#192A56]/60 pointer-events-none -z-10" />
 
       {/* BANNER CONTENT */}
-      <div className="z-10 flex flex-col items-center pt-8 px-6 text-center">
+      <div className="px-6 sm:px-12 lg:px-32 w-full z-10 flex flex-col items-start pt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-medium text-white mb-3 max-w-4xl tracking-tight drop-shadow-sm">
           Find the Best Resources for You
         </h1>
@@ -32,7 +32,7 @@ const HeroSection = () => {
           Discover, Learn, and Upskill with our wide range of resources
         </p>
 
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-start gap-6">
           <p className="text-white/95 font-semibold tracking-wide">
             Case Studies | E-books | Courses | Blogs
           </p>

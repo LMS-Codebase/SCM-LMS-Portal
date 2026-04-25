@@ -15,6 +15,11 @@ const storage = multerS3({
             folder = "course-videos";
         } else if (file.mimetype === "application/pdf") {
             folder = "course-pdfs";
+        } else if (
+            file.mimetype === "application/vnd.ms-excel" ||
+            file.mimetype === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ) {
+            folder = "course-sheets";
         }
 
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);

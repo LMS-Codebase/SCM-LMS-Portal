@@ -17,6 +17,15 @@ export const resourceApi = createApi({
       invalidatesTags: ["Resource"],
     }),
 
+    updateResourceThumbnail: builder.mutation({
+      query: ({ resourceId, formData }) => ({
+        url: `${resourceId}/thumbnail`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: ["Resource"],
+    }),
+
     getPublishedResources: builder.query({
       query: () => ({
         url: "",
@@ -30,4 +39,5 @@ export const resourceApi = createApi({
 export const {
   useCreateResourceMutation,
   useGetPublishedResourcesQuery,
+  useUpdateResourceThumbnailMutation,
 } = resourceApi;

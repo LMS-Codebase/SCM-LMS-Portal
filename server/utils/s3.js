@@ -15,6 +15,9 @@ export const s3Client = new S3Client({
 
 const bucketName = process.env.AWS_BUCKET_NAME;
 
+export const getApiBaseUrl = () =>
+  (process.env.API_URL || "http://localhost:5000").replace(/\/+$/, "");
+
 /**
  * @param {string} filePath
  * @param {"video" | "raw" | "pdf" | null} explicitType
@@ -45,7 +48,7 @@ export const uploadMedia = async (filePath, explicitType = null) => {
 
     // After uploading, return the backend proxy URL that will redirect to a pre-signed URL.
     // This allows the DB to store a permanent URL that dynamically signs the S3 asset on fetch
-    const secure_url = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileName)}`;
+    const secure_url = `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(fileName)}`;
 
     return {
       public_id: fileName, // Use the S3 Key as public_id

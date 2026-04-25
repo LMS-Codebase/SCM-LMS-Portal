@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useGetPublishedResourcesQuery } from "@/features/api/resourceApi";
 import { useGetDomainsQuery } from "@/features/api/domainApi";
+import {
+  CARD_TITLE_MAX_CHARS,
+  getCardTitleValidationError,
+  normalizeCardTitle,
+} from "@/lib/titleValidation";
 
 const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
@@ -20,11 +25,19 @@ const AddCourse = () => {
   const navigate = useNavigate();
 
   const createCourseHandler = async () => {
-    if (domain.length === 0 || resource === "" || courseTitle === "") {
+    const titleError = getCardTitleValidationError(courseTitle);
+
+    if (domain.length === 0 || resource === "" || !courseTitle.trim()) {
       toast.error("Please fill in all the foundational fields.");
       return;
     }
-    await createCourse({ courseTitle, resource, domain });
+
+    if (titleError) {
+      toast.error(titleError);
+      return;
+    }
+
+    await createCourse({ courseTitle: normalizeCardTitle(courseTitle), resource, domain });
   };
 
   useEffect(() => {
@@ -64,9 +77,11 @@ const AddCourse = () => {
             type="text"
             value={courseTitle}
             onChange={(e) => setCourseTitle(e.target.value)}
-            placeholder="e.g. Supply Chain Modeling and Simulation"
+            maxLength={CARD_TITLE_MAX_CHARS}
+            placeholder="e.g. Supply Chain Modeling"
             className="focus-visible:ring-teal-500 border-gray-200 h-12 text-lg font-medium"
           />
+          <p className="text-xs text-gray-500">Max {courseTitle.length}/{CARD_TITLE_MAX_CHARS}</p>
         </div>
 
         {/* Step 2: Categorization */}

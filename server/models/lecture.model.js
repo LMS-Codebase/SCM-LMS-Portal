@@ -10,6 +10,8 @@ const lectureSchema = new mongoose.Schema(
     publicId: { type: String },
     pdfUrl: { type: String },
     pdfPublicId: { type: String },
+    excelUrl: { type: String },
+    excelPublicId: { type: String },
     isPreviewFree: { type: Boolean },
     subLectures: [
       {

@@ -1,6 +1,6 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
-import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia, extractPublicId } from "../utils/s3.js"
+import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia, extractPublicId, getApiBaseUrl } from "../utils/s3.js"
 
 
 // Creating Courses
@@ -10,6 +10,7 @@ export const createCourse = async (req, res) => {
       courseTitle,
       subTitle,
       description,
+      whatWillYouLearn,
       courseLevel,
       coursePrice,
       courseDuration,
@@ -32,6 +33,7 @@ export const createCourse = async (req, res) => {
     };
     if (subTitle !== undefined) courseData.subTitle = subTitle;
     if (description !== undefined) courseData.description = description;
+    if (whatWillYouLearn !== undefined) courseData.whatWillYouLearn = whatWillYouLearn;
     if (courseLevel !== undefined) courseData.courseLevel = courseLevel;
     if (coursePrice !== undefined) courseData.coursePrice = coursePrice;
     if (courseDuration !== undefined) courseData.courseDuration = courseDuration;
@@ -168,6 +170,7 @@ export const editCourse = async (req, res) => {
       courseTitle,
       subTitle,
       description,
+      whatWillYouLearn,
       courseLevel,
       coursePrice,
       courseDuration,
@@ -190,7 +193,7 @@ export const editCourse = async (req, res) => {
       }
 
       const fileKey = req.files.courseThumbnail[0].key;
-      course.courseThumbnail = `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
+      course.courseThumbnail = `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(fileKey)}`;
     }
 
     /* ================= COMMON VIDEOS ================= */
@@ -198,7 +201,7 @@ export const editCourse = async (req, res) => {
       for (const file of req.files.commonVideos) {
         course.commonVideos.push({
           public_id: file.key,
-          url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
+          url: `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
           originalName: file.originalname,
         });
       }
@@ -209,7 +212,7 @@ export const editCourse = async (req, res) => {
       for (const file of req.files.commonPdfs) {
         course.commonPdfs.push({
           public_id: file.key,
-          url: `${process.env.API_URL || 'http://localhost:5000'}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
+          url: `${getApiBaseUrl()}/api/v1/media/s3?key=${encodeURIComponent(file.key)}`,
           originalName: file.originalname,
         });
       }
@@ -221,6 +224,7 @@ export const editCourse = async (req, res) => {
     if (courseTitle !== undefined) course.courseTitle = courseTitle;
     if (subTitle !== undefined) course.subTitle = subTitle;
     if (description !== undefined) course.description = description;
+    if (whatWillYouLearn !== undefined) course.whatWillYouLearn = whatWillYouLearn;
     if (courseLevel !== undefined) course.courseLevel = courseLevel;
     if (coursePrice !== undefined) course.coursePrice = Number(coursePrice);
     if (courseDuration !== undefined) course.courseDuration = courseDuration;
@@ -466,7 +470,7 @@ export const editLecture = async (req, res) => {
     // console.log(req.body);
 
     //  videoInfo obj contains public_id & url 
-    const { lectureTitle, videoInfo, pdfInfo, isPreviewFree } = req.body;
+    const { lectureTitle, videoInfo, pdfInfo, excelInfo, isPreviewFree } = req.body;
     const { courseId, lectureId } = req.params;
     const lecture = await Lecture.findById(lectureId);
     if (!lecture) {
@@ -482,6 +486,8 @@ export const editLecture = async (req, res) => {
 
     if (pdfInfo?.pdfUrl) lecture.pdfUrl = pdfInfo.pdfUrl;
     if (pdfInfo?.publicId) lecture.pdfPublicId = pdfInfo.publicId;
+    if (excelInfo?.excelUrl) lecture.excelUrl = excelInfo.excelUrl;
+    if (excelInfo?.publicId) lecture.excelPublicId = excelInfo.publicId;
 
     lecture.isPreviewFree = isPreviewFree;
 

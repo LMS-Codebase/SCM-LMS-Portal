@@ -14,10 +14,10 @@ export const courseApi = createApi({
     }),
     endpoints: (builder) => ({
         createCourse: builder.mutation({       //mutation to pass data
-            query: ({ courseTitle, resource, domain }) => ({   // passing data in request
+            query: ({ courseTitle, resource, domain, whatWillYouLearn, description, subTitle }) => ({   // passing data in request
                 url: "",
                 method: "POST",
-                body: { courseTitle, resource, domain },
+                body: { courseTitle, resource, domain, whatWillYouLearn, description, subTitle },
             }),
             invalidatesTags: ['Refetch_Creator_Course']   // invalidates means --> it refetches the courses.
         }),
@@ -80,10 +80,10 @@ export const courseApi = createApi({
             providesTags: ['Refetch_Lecture']
         }),
         editLecture: builder.mutation({
-            query: ({ lectureTitle, videoInfo, pdfInfo, isPreviewFree, courseId, lectureId }) => ({
+            query: ({ lectureTitle, videoInfo, pdfInfo, excelInfo, isPreviewFree, courseId, lectureId }) => ({
                 url: `/${courseId}/lecture/${lectureId}`,
                 method: "POST",
-                body: { lectureTitle, videoInfo, pdfInfo, isPreviewFree }
+                body: { lectureTitle, videoInfo, pdfInfo, excelInfo, isPreviewFree }
             }),
             invalidatesTags: (result, error, arg) => [{ type: "Course", id: arg.courseId }, 'Refetch_Lecture']
         }),

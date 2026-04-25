@@ -102,8 +102,8 @@ const ConnectUs = () => {
             <div className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-8 py-12 flex flex-col justify-start items-center">
 
                 {/* Title Line matches screenshot */}
-                <div className="w-full border-b-[3px] border-[#007bff] pb-3 mb-6">
-                    <h1 className="text-3xl md:text-4xl font-bold text-[#007bff] uppercase tracking-wide">
+                <div className="w-full border-b-[4px] border-black pb-3 mb-6">
+                    <h1 className="text-3xl md:text-[48px] font-semibold text-[#005599] uppercase tracking-tight">
                         Contact Us
                     </h1>
                 </div>
@@ -196,7 +196,7 @@ const ConnectUs = () => {
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-[#007bff] hover:bg-blue-700 text-white rounded-md h-12 text-base font-medium tracking-wide transition-colors"
+                                className="w-full bg-[#005599] hover:bg-[#005599]/80 text-white rounded-md h-12 text-lg font-medium tracking-wide transition-colors"
                             >
                                 {isLoading ? (
                                     <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
